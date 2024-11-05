@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>Cafe Delights</title>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Cafe Delights</h1>
+      <p>Your cozy corner for the best coffee and treats in town.</p>
+      <h3>Contact Us</h3>
+      <p>We'd love to hear from you! Please fill out the form below:</p>
+    </header>
+    <main>
+      <form action="submit" method="post">
+        <section id="personal-info">
+          <h4><u>Personal Information</u></h4>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required /><br /><br />
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" required /><br /><br />
+          <label for="phone">Phone Number:</label>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="123-456-7890"
+            required
+          /><br /><br />
+          <label for="dob">Date of Birth:</label>
+          <input type="date" name="dob" id="dob" /><br /><br />
+        </section>
+        <hr />
+        <section id="visit-info">
+          <h4><u>Visit Information</u></h4>
+          <label for="visit">Preferred Visit Date:</label>
+          <input type="date" name="visit" id="visit" required /><br /><br />
+          <label for="time">Preferred Time:</label>
+          <input type="time" name="time" id="time" required /><br /><br />
+          <label for="customer">Are you a returning customer?</label
+          ><br /><br />
+          <input type="radio" name="customer" id="yes" value="Yes" />
+          <label for="yes">Yes</label><br />
+          <input type="radio" name="customer" id="no" value="No" />
+          <label for="no">No</label><br /><br />
+        </section>
+        <hr />
+        <section id="order">
+          <h4><u>Order Preferences</u></h4>
+          <label for="drink">Favorite Drink:</label>
+          <select name="drink" id="drink" required>
+            <option value="Latte">Latte</option>
+            <option value="Mocha">Mocha</option>
+            <option value="Dark">Dark</option></select
+          ><br /><br />
+          <label for="diet">Select your dietary preferences:</label><br />
+          <input type="checkbox" name="vegan" id="vegan" value="Vegan" />
+          <label for="vegan">Vegan</label><br />
+          <input
+            type="checkbox"
+            name="vegetarian"
+            id="vegetarian"
+            value="Vegetarian"
+          />
+          <label for="vegetarian">Vegatarian</label><br />
+          <input
+            type="checkbox"
+            name="gluten"
+            id="gluten"
+            value="Gluten-free"
+          />
+          <label for="gluten">Gluten-free</label><br />
+        </section>
+        <hr />
+        <section id="feedback">
+          <h4><u>Feedback</u></h4>
+          <label for="rate">Rate Your Last Visit (1-5):</label>
+          <input
+            type="range"
+            name="rate"
+            id="rate"
+            min="1"
+            max="5"
+            value="1"
+          /><br /><br />
+          <label for="comments">Additional Comments:</label><br />
+          <textarea name="comments" id="comments" rows="5" cols="50" placeholder="Tell us about your experience..."></textarea
+          ><br /><br />
+          <span>Would you like to receive our newsletter?</span>
+          <input
+            type="checkbox"
+            name="newsletter"
+            id="newsletter"
+            value="Yes"
+          />
+        </section>
+        <hr />
+        <div><button type="submit">Submit</button></div>
+      </form>
+    </main>
+  </body>
+</html>
