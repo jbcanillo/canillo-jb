@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sticky Navbar</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <!-- Logo on the left -->
+      <a href="#" class="logo">
+        <img src="https://via.placeholder.com/50" alt="Food" class="logo"
+      /></a>
+      <!-- Navigation links centered -->
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#review">Review</a>
+        <a href="#order">Order</a>
+      </div>
+      <!-- Icon links on the right -->
+      <div class="nav-icons">
+        <a href="#"><i class="fas fa-search"></i></a>
+        <a href="#"><i class="fas fa-heart"></i></a>
+        <a href="#"><i class="fas fa-shopping-cart"></i></a>
+      </div>
+    </nav>
+
+    <!-- Content Sections -->
+    <div class="content">
+      <!-- Home Page Content -->
+      <section class="section" id="home">
+        <div class="text-column">
+          <h1>
+            Get Fresh <span class="custom-text">Food</span><br />in an Easy Way
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae
+            justo sit amet lorem volutpat tristique. Nullam ut metus vel dui
+            consequat auctor. Fusce ac ex et dolor tempor volutpat ac in tortor.
+          </p>
+          <div class="button-row" style="margin-top: 10vh">
+            <button class="cta-button">
+              Order Now &nbsp<span
+                class="fa fa-chevron-right"
+                style="font-size: 0.9rem"
+              ></span>
+            </button>
+          </div>
+        </div>
+        <div class="image-column">
+          <img
+            src="https://via.placeholder.com/300"
+            alt="Sample Image"
+            class="hero-image"
+          />
+        </div>
+      </section>
+
+      <!-- About Page Content -->
+      <section class="section" id="about">
+        <div class="image-column">
+          <img
+            src="https://via.placeholder.com/300"
+            alt="Sample Image"
+            class="hero-image"
+          />
+        </div>
+        <div class="text-column">
+          <h1><span class="custom-text">About</span> Us</h1>
+          <h2>Why Choose us?</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+            eget felis ac nulla gravida facilisis a eget sapien. Donec gravida
+            massa ac mauris auctor, eu convallis enim dictum.
+          </p>
+          <div class="button-row" style="margin-top: 10vh">
+            <button class="cta-button">
+              Order Now &nbsp<span
+                class="fa fa-chevron-right"
+                style="font-size: 0.9rem"
+              ></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu Content -->
+      <section id="menu" class="menu-section">
+        <center>
+          <h1>Our <span class="custom-text">Menu</span></h1>
+        </center>
+        <div class="menu-cards">
+          <!-- Card 1 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 1"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Delicious Burger</h3>
+              <p>
+                Enjoy a juicy and delicious burger with fresh ingredients and a
+                crispy bun.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 2"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Classic Pizza</h3>
+              <p>
+                A classic pizza topped with mozzarella, tomatoes, and basil. A
+                favorite!
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 3"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Chicken Tenders</h3>
+              <p>
+                Golden fried chicken tenders served with a dipping sauce of your
+                choice.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 4"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Pasta Primavera</h3>
+              <p>
+                A delicious mix of pasta and fresh vegetables in a light, savory
+                sauce.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 5"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Grilled Salmon</h3>
+              <p>
+                A perfectly grilled salmon fillet served with a side of
+                vegetables.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 6"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Veggie Burger</h3>
+              <p>
+                A healthy and tasty veggie burger loaded with fresh veggies and
+                flavors.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 7"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Cheese Fries</h3>
+              <p>
+                Crispy fries topped with melted cheese and savory seasoning.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 8"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Caesar Salad</h3>
+              <p>
+                Classic Caesar salad with romaine lettuce, croutons, and creamy
+                dressing.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 9"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Sushi Platter</h3>
+              <p>
+                A selection of fresh sushi rolls served with soy sauce and
+                wasabi.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="menu-card">
+            <img
+              src="https://via.placeholder.com/300"
+              alt="Food Item 10"
+              class="menu-card-image"
+            />
+            <div class="menu-card-description">
+              <h3>Chocolate Cake</h3>
+              <p>
+                A rich and indulgent chocolate cake topped with creamy frosting.
+              </p>
+              <h4>$20.00</h4>
+            </div>
+            <div class="menu-card-stars">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star-half"></span>
+            </div>
+            <button class="menu-card-button">Order Now</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

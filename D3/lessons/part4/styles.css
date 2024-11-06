@@ -1,0 +1,140 @@
+/* Reset all margin and padding on elements and apply box-sizing */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    margin: 0 auto; /* Centers the container horizontally */
+    max-width: 900px; /* sets a max width of 900px */
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar Styling */
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.logo{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Navigation Styling */
+.nav-links{
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li{
+    margin-left: 15px;
+}
+
+.nav-links a {
+    color:white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover{
+    color: #0073e6;
+}
+
+/* Header Section */
+header {
+    background-color: #0073e6;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-style:italic;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    background-color: #ff6347;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s
+}
+
+.cta-button:hover {
+    background-color: #ff4500;
+}
+
+.content {
+    margin: 20px 0;
+
+}
+
+.section{
+    margin-bottom: 20px;
+}
+
+.section h2{
+    color: #0073e6;
+    margin-bottom: 10px;
+}
+
+.section p {
+    line-height: 1.6;
+    color: #333
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top:10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.skills ul{
+    list-style-type: square;
+    margin: 10px 0;
+    padding-left: 20px;
+    color: #555;
+}
+
+.skills li{
+    margin: 5px 0;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color:white;
+    border-top: 2px solid #555;
+    margin-top: 20px;
+}
+
+.footer a {
+    color: #0073e6;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
