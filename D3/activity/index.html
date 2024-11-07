@@ -3,19 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sticky Navbar</title>
+    <title>Foodie</title>
     <link rel="stylesheet" href="styles.css" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar">
       <!-- Logo on the left -->
       <a href="#" class="logo">
-        <img src="https://via.placeholder.com/50" alt="Food" class="logo"
+        <img src="https://placehold.co/100x50" alt="Food" class="logo"
       /></a>
       <!-- Navigation links centered -->
       <div class="nav-links">
@@ -25,6 +22,7 @@
         <a href="#gallery">Gallery</a>
         <a href="#review">Review</a>
         <a href="#order">Order</a>
+        <a href="#team">Team</a>
       </div>
       <!-- Icon links on the right -->
       <div class="nav-icons">
@@ -33,7 +31,6 @@
         <a href="#"><i class="fas fa-shopping-cart"></i></a>
       </div>
     </nav>
-
     <!-- Content Sections -->
     <div class="content">
       <!-- Home Page Content -->
@@ -48,30 +45,31 @@
             consequat auctor. Fusce ac ex et dolor tempor volutpat ac in tortor.
           </p>
           <div class="button-row" style="margin-top: 10vh">
-            <button class="cta-button">
-              Order Now &nbsp<span
-                class="fa fa-chevron-right"
-                style="font-size: 0.9rem"
-              ></span>
-            </button>
+            <a href="#order" style="text-decoration: none">
+              <button class="cta-button">
+                Order Now<span
+                  class="fa fa-chevron-right"
+                  style="font-size: 0.9rem; margin-left: 12px"
+                ></span>
+              </button>
+            </a>
           </div>
         </div>
-        <div class="image-column">
+        <div class="hero-image-column">
           <img
-            src="https://via.placeholder.com/300"
+            src="https://placehold.co/600"
             alt="Sample Image"
-            class="hero-image"
+            class="hero-image floating-image"
           />
         </div>
       </section>
-
       <!-- About Page Content -->
       <section class="section" id="about">
-        <div class="image-column">
+        <div class="hero-image-column">
           <img
-            src="https://via.placeholder.com/300"
+            src="https://placehold.co/600"
             alt="Sample Image"
-            class="hero-image"
+            class="hero-image floating-image"
           />
         </div>
         <div class="text-column">
@@ -83,34 +81,34 @@
             massa ac mauris auctor, eu convallis enim dictum.
           </p>
           <div class="button-row" style="margin-top: 10vh">
-            <button class="cta-button">
-              Order Now &nbsp<span
-                class="fa fa-chevron-right"
-                style="font-size: 0.9rem"
-              ></span>
-            </button>
+            <a href="#order" style="text-decoration: none">
+              <button class="cta-button">
+                Order Now<span
+                  class="fa fa-chevron-right"
+                  style="font-size: 0.9rem; margin-left: 12px"
+                ></span>
+              </button>
+            </a>
           </div>
         </div>
       </section>
-
-      <!-- Menu Content -->
+      <!-- Menu Page Content -->
       <section id="menu" class="menu-section">
         <center>
           <h1>Our <span class="custom-text">Menu</span></h1>
         </center>
         <div class="menu-cards">
-          <!-- Card 1 -->
           <div class="menu-card">
             <img
-              src="https://via.placeholder.com/300"
+              src="https://placehold.co/200"
               alt="Food Item 1"
               class="menu-card-image"
             />
             <div class="menu-card-description">
-              <h3>Delicious Burger</h3>
+              <h3>Burger</h3>
               <p>
-                Enjoy a juicy and delicious burger with fresh ingredients and a
-                crispy bun.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste.
               </p>
               <h4>$20.00</h4>
             </div>
@@ -121,21 +119,19 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half"></span>
             </div>
-            <button class="menu-card-button">Order Now</button>
+            <a href="#"><button class="menu-card-button">Order Now</button></a>
           </div>
-
-          <!-- Card 2 -->
           <div class="menu-card">
             <img
-              src="https://via.placeholder.com/300"
+              src="https://placehold.co/200"
               alt="Food Item 2"
               class="menu-card-image"
             />
             <div class="menu-card-description">
-              <h3>Classic Pizza</h3>
+              <h3>Pasta</h3>
               <p>
-                A classic pizza topped with mozzarella, tomatoes, and basil. A
-                favorite!
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste.
               </p>
               <h4>$20.00</h4>
             </div>
@@ -146,21 +142,23 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half"></span>
             </div>
-            <button class="menu-card-button">Order Now</button>
+            <a href="#"
+              ><a href="#"
+                ><button class="menu-card-button">Order Now</button></a
+              ></a
+            >
           </div>
-
-          <!-- Card 3 -->
           <div class="menu-card">
             <img
-              src="https://via.placeholder.com/300"
+              src="https://placehold.co/200"
               alt="Food Item 3"
               class="menu-card-image"
             />
             <div class="menu-card-description">
-              <h3>Chicken Tenders</h3>
+              <h3>Lasagna</h3>
               <p>
-                Golden fried chicken tenders served with a dipping sauce of your
-                choice.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste.
               </p>
               <h4>$20.00</h4>
             </div>
@@ -171,21 +169,19 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half"></span>
             </div>
-            <button class="menu-card-button">Order Now</button>
+            <a href="#"><button class="menu-card-button">Order Now</button></a>
           </div>
-
-          <!-- Card 4 -->
           <div class="menu-card">
             <img
-              src="https://via.placeholder.com/300"
+              src="https://placehold.co/200"
               alt="Food Item 4"
               class="menu-card-image"
             />
             <div class="menu-card-description">
-              <h3>Pasta Primavera</h3>
+              <h3>Chocolate Drink</h3>
               <p>
-                A delicious mix of pasta and fresh vegetables in a light, savory
-                sauce.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste.
               </p>
               <h4>$20.00</h4>
             </div>
@@ -196,21 +192,19 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half"></span>
             </div>
-            <button class="menu-card-button">Order Now</button>
+            <a href="#"><button class="menu-card-button">Order Now</button></a>
           </div>
-
-          <!-- Card 5 -->
           <div class="menu-card">
             <img
-              src="https://via.placeholder.com/300"
+              src="https://placehold.co/200"
               alt="Food Item 5"
               class="menu-card-image"
             />
             <div class="menu-card-description">
-              <h3>Grilled Salmon</h3>
+              <h3>Pizza</h3>
               <p>
-                A perfectly grilled salmon fillet served with a side of
-                vegetables.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste.
               </p>
               <h4>$20.00</h4>
             </div>
@@ -221,21 +215,19 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half"></span>
             </div>
-            <button class="menu-card-button">Order Now</button>
+            <a href="#"><button class="menu-card-button">Order Now</button></a>
           </div>
-
-          <!-- Card 6 -->
           <div class="menu-card">
             <img
-              src="https://via.placeholder.com/300"
+              src="https://placehold.co/200"
               alt="Food Item 6"
               class="menu-card-image"
             />
             <div class="menu-card-description">
-              <h3>Veggie Burger</h3>
+              <h3>Hotdog Sandwich</h3>
               <p>
-                A healthy and tasty veggie burger loaded with fresh veggies and
-                flavors.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste.
               </p>
               <h4>$20.00</h4>
             </div>
@@ -246,20 +238,19 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half"></span>
             </div>
-            <button class="menu-card-button">Order Now</button>
+            <a href="#"><button class="menu-card-button">Order Now</button></a>
           </div>
-
-          <!-- Card 7 -->
           <div class="menu-card">
             <img
-              src="https://via.placeholder.com/300"
+              src="https://placehold.co/200"
               alt="Food Item 7"
               class="menu-card-image"
             />
             <div class="menu-card-description">
-              <h3>Cheese Fries</h3>
+              <h3>Orange Juice</h3>
               <p>
-                Crispy fries topped with melted cheese and savory seasoning.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste.
               </p>
               <h4>$20.00</h4>
             </div>
@@ -270,21 +261,19 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half"></span>
             </div>
-            <button class="menu-card-button">Order Now</button>
+            <a href="#"><button class="menu-card-button">Order Now</button></a>
           </div>
-
-          <!-- Card 8 -->
           <div class="menu-card">
             <img
-              src="https://via.placeholder.com/300"
+              src="https://placehold.co/200"
               alt="Food Item 8"
               class="menu-card-image"
             />
             <div class="menu-card-description">
-              <h3>Caesar Salad</h3>
+              <h3>Chicken Biryani</h3>
               <p>
-                Classic Caesar salad with romaine lettuce, croutons, and creamy
-                dressing.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste.
               </p>
               <h4>$20.00</h4>
             </div>
@@ -295,59 +284,345 @@
               <span class="fa fa-star"></span>
               <span class="fa fa-star-half"></span>
             </div>
-            <button class="menu-card-button">Order Now</button>
+            <a href="#"><button class="menu-card-button">Order Now</button></a>
           </div>
-
-          <!-- Card 9 -->
-          <div class="menu-card">
-            <img
-              src="https://via.placeholder.com/300"
-              alt="Food Item 9"
-              class="menu-card-image"
-            />
-            <div class="menu-card-description">
-              <h3>Sushi Platter</h3>
-              <p>
-                A selection of fresh sushi rolls served with soy sauce and
-                wasabi.
-              </p>
-              <h4>$20.00</h4>
-            </div>
-            <div class="menu-card-stars">
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star-half"></span>
-            </div>
-            <button class="menu-card-button">Order Now</button>
+        </div>
+      </section>
+      <!-- Gallery Page Content -->
+      <section class="gallery-section" id="gallery">
+        <center>
+          <h1>Our <span class="custom-text">Gallery</span></h1>
+        </center>
+        <div class="gallery-grid">
+          <!-- Picture 1 -->
+          <div class="image-container">
+            <a href="#"
+              ><img
+                src="https://placehold.co/400x300"
+                alt="Picture 1"
+                class="gallery-image"
+              />
+            </a>
           </div>
-
-          <!-- Card 10 -->
-          <div class="menu-card">
+          <!-- Picture 2 -->
+          <div class="image-container">
+            <a href="#"
+              ><img
+                src="https://placehold.co/400x300"
+                alt="Picture 2"
+                class="gallery-image"
+              />
+            </a>
+          </div>
+          <!-- Picture 3 -->
+          <div class="image-container">
+            <a href="#"
+              ><img
+                src="https://placehold.co/400x300"
+                alt="Picture 3"
+                class="gallery-image"
+              />
+            </a>
+          </div>
+          <!-- Picture 4 -->
+          <div class="image-container">
+            <a href="#"
+              ><img
+                src="https://placehold.co/400x300"
+                alt="Picture 4"
+                class="gallery-image"
+              />
+            </a>
+          </div>
+          <!-- Picture 5 -->
+          <div class="image-container">
+            <a href="#"
+              ><img
+                src="https://placehold.co/400x300"
+                alt="Picture 5"
+                class="gallery-image"
+              />
+            </a>
+          </div>
+          <!-- Picture 6 -->
+          <div class="image-container">
+            <a href="#"
+              ><img
+                src="https://placehold.co/400x300"
+                alt="Picture 6"
+                class="gallery-image"
+              />
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- Review Page Content -->
+      <section class="review-section" id="review">
+        <center>
+          <h1>Customer <span class="custom-text">Review</span></h1>
+        </center>
+        <div class="review-grid">
+          <div class="review-card">
             <img
-              src="https://via.placeholder.com/300"
-              alt="Food Item 10"
-              class="menu-card-image"
+              src="https://placehold.co/200"
+              alt="Reviewer 1"
+              class="review-card-image"
             />
-            <div class="menu-card-description">
-              <h3>Chocolate Cake</h3>
+            <div class="review-card-description">
+              <h2>John Doe</h2>
+              <div class="menu-card-stars">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-half"></span>
+              </div>
               <p>
-                A rich and indulgent chocolate cake topped with creamy frosting.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
+                laborum architecto totam minus reiciendis hic explicabo. Natus
+                quidem perferendis culpa sunt magni. Illo porro earum ut
+                adipisci quaerat, commodi iste voluptas eligendi nulla sequi
+                doloribus dignissimos non voluptatum perspiciatis ratione quos
+                pariatur quis vitae nisi! Excepturi harum natus in praesentium.
               </p>
-              <h4>$20.00</h4>
             </div>
-            <div class="menu-card-stars">
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star-half"></span>
+          </div>
+          <div class="review-card">
+            <img
+              src="https://placehold.co/200"
+              alt="Reviewer 1"
+              class="review-card-image"
+            />
+            <div class="review-card-description">
+              <h2>John Doe</h2>
+              <div class="menu-card-stars">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-half"></span>
+              </div>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
+                laborum architecto totam minus reiciendis hic explicabo. Natus
+                quidem perferendis culpa sunt magni. Illo porro earum ut
+                adipisci quaerat, commodi iste voluptas eligendi nulla sequi
+                doloribus dignissimos non voluptatum perspiciatis ratione quos
+                pariatur quis vitae nisi! Excepturi harum natus in praesentium.
+              </p>
             </div>
-            <button class="menu-card-button">Order Now</button>
+          </div>
+          <div class="review-card">
+            <img
+              src="https://placehold.co/200"
+              alt="Reviewer 1"
+              class="review-card-image"
+            />
+            <div class="review-card-description">
+              <h2>John Doe</h2>
+              <div class="menu-card-stars">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-half"></span>
+              </div>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
+                laborum architecto totam minus reiciendis hic explicabo. Natus
+                quidem perferendis culpa sunt magni. Illo porro earum ut
+                adipisci quaerat, commodi iste voluptas eligendi nulla sequi
+                doloribus dignissimos non voluptatum perspiciatis ratione quos
+                pariatur quis vitae nisi! Excepturi harum natus in praesentium.
+              </p>
+            </div>
+          </div>
+          <div class="review-card">
+            <img
+              src="https://placehold.co/200"
+              alt="Reviewer 1"
+              class="review-card-image"
+            />
+            <div class="review-card-description">
+              <h2>John Doe</h2>
+              <div class="menu-card-stars">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star-half"></span>
+              </div>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
+                laborum architecto totam minus reiciendis hic explicabo. Natus
+                quidem perferendis culpa sunt magni. Illo porro earum ut
+                adipisci quaerat, commodi iste voluptas eligendi nulla sequi
+                doloribus dignissimos non voluptatum perspiciatis ratione quos
+                pariatur quis vitae nisi! Excepturi harum natus in praesentium.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Order Page Content -->
+      <section class="order-section" id="order">
+        <center>
+          <h1><span class="custom-text">Order</span> Now</h1>
+        </center>
+        <div class="order-container">
+          <div class="order-image-column">
+            <img
+              src="https://placehold.co/600"
+              alt="Sample Image"
+              class="hero-image"
+            />
+          </div>
+          <div class="order-form-column">
+            <form action="#" method="post" target="_blank" id="order-form">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="inputbox"
+                name="name"
+                placeholder="Your fullname"
+                required
+              />
+              <label for="name">Email</label>
+              <input
+                type="email"
+                class="inputbox"
+                name="email"
+                placeholder="Your email"
+              />
+              <label for="name">Contact No.</label>
+              <input
+                type="text"
+                class="inputbox"
+                name="contact"
+                placeholder="Your contact number"
+                required
+              />
+              <label for="name">How much?</label>
+              <input
+                type="text"
+                class="inputbox"
+                name="contact"
+                placeholder="No. of orders"
+                required
+              />
+              <label for="name">Your Order(s)?</label>
+              <input
+                type="text"
+                class="inputbox"
+                name="orders"
+                placeholder="Food to order"
+                required
+              />
+              <label for="name">Address</label>
+              <input
+                type="text"
+                class="inputbox"
+                name="address"
+                placeholder="Your delivery address"
+                required
+              />
+              <button type="submit" class="cta-button">Submit Order</button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- Team Page Content -->
+      <section class="team-section" id="team">
+        <center>
+          <h1>Our <span class="custom-text">Team</span></h1>
+        </center>
+        <div class="team-grid">
+          <div class="team-photo-container">
+            <img
+              src="https://placehold.co/200"
+              alt="Photo 1"
+              class="team-image"
+            />
+          </div>
+          <div class="team-photo-container">
+            <img
+              src="https://placehold.co/200"
+              alt="Photo 2"
+              class="team-image"
+            />
+          </div>
+          <div class="team-photo-container">
+            <img
+              src="https://placehold.co/200"
+              alt="Photo 3"
+              class="team-image"
+            />
+          </div>
+          <div class="team-photo-container">
+            <img
+              src="https://placehold.co/200"
+              alt="Photo 4"
+              class="team-image"
+            />
           </div>
         </div>
       </section>
     </div>
+    <!-- Footer -->
+    <section class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-item">
+          <h3>Locations</h3>
+          <ul class="footer-list">
+            <li>Sri Lanka</li>
+            <li>USA</li>
+            <li>India</li>
+            <li>Japan</li>
+            <li>Italy</li>
+          </ul>
+        </div>
+        <div class="footer-item">
+          <h3>Quick Links</h3>
+          <ul class="footer-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#order">Order</a></li>
+            <li><a href="#team">Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-item">
+          <h3>Contact Us</h3>
+          <ul class="footer-list">
+            <li>+94 12 3456 789</li>
+            <li>+95 89 7654 321</li>
+            <li>sales@foodie.com</li>
+            <li>info@foodie.com</li>
+          </ul>
+        </div>
+        <div class="footer-item">
+          <h3>Our Services</h3>
+          <ul class="footer-list">
+            <li>Fast Delivery</li>
+            <li>Easy Payments</li>
+            <li>24x7 Service</li>
+          </ul>
+        </div>
+        <div class="footer-item">
+          <h3>Follow Us</h3>
+          <div class="nav-icons" style="font-size: 2rem;">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <p>
+        © 2024 Foodie. All Rights Reserved. | Design by
+        <span style="color: #fec407db">JB Canillo </span>
+      </p>
+    </section>
   </body>
 </html>
