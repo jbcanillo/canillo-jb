@@ -3,6 +3,7 @@ function guessSecret() {
   console.clear();
   const secretNumber = parseInt(Math.random() * 10) + 1;
   let guessedNumber;
+  console.log('Welcome to "Guess the Secret Number Game"');
   do {
     ++attempts;
     guessedNumber = parseInt(prompt("Enter your guess number (1-10):"));
