@@ -93,7 +93,7 @@ const garage = [];
 garage.push(car);
 
 // Step 18: Log the 'garage' array to the console to verify the car is stored in the array.
-console.log(`The garage has ${car.length} car:`,garage);
+console.log(`The garage has ${garage.length} car:`,garage);
 
 // Step 19: Create an object called 'person' with properties 'name', 'age', and 'city'.
 const person = {
