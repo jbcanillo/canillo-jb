@@ -37,7 +37,7 @@ const isEven = function(num){
 let even = isEven(6);
 
 // Step 11: Log the value of the even variable to the console.
-console.log('6 is:',even);
+console.log('6 is even?',even);
 
 // Step 12: Create a function expression named square and assign it an anonymous function that takes a number as a parameter and returns its square.
 const square = function(num){
