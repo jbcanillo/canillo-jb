@@ -14,7 +14,7 @@
   <body>
     <div class="container-fluid m-2">
       <div class="card col-12">
-        <div class="card-header"><h1>Loan Calculator</h1></div>
+        <div class="card-header"><h2>Loan Calculator</h2></div>
         <div class="card-body">
           <div class="col-12">
             <label for="loan-amount">Loan Amount:</label>
@@ -46,9 +46,8 @@
       document.querySelector("#calculate").addEventListener("click", () => {
         const loan_amount = parseFloat(document.querySelector("#loan-amount").value);
         const loan_rate = parseFloat(document.querySelector("#loan-rate").value) / 100 / 12; 
-        const loan_years = parseFloat(document.querySelector("#loan-years").value);
-        const loan_months = loan_years * 12;
-        const payment = (loan_amount * (loan_rate)) / (1 - Math.pow(1 + loan_rate, -loan_months));
+        const loan_years = parseFloat(document.querySelector("#loan-years").value) * 12;
+        const payment = (loan_amount * loan_rate) / (1 - Math.pow(1 + loan_rate, -loan_years));
         console.log(payment);
         document.querySelector("#payment").textContent = "$"+payment.toFixed(2);
       });

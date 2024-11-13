@@ -12,10 +12,10 @@
     />
   </head>
   <body>
-    <div class="container-fluid mt-5">
-      <div class="d-flex justify-content-center">
+    <div class="container-fluid m-2">
+      <div class="col-12">
         <div class="card">
-          <div class="card-header"><h1>Task Manager</h1></div>
+          <div class="card-header"><h2>Task Manager</h2></div>
           <div class="card-body">
             <div class="input-group">
               <input
@@ -24,7 +24,7 @@
                 placeholder="Add a task..."
                 id="task-name"
               />
-              <button class="btn btn-success" id="add-task">Add Task</button>
+              <button class="btn btn-success" id="add-task">Add</button>
             </div>
             <div class="panel">
               <ul class="list-group list-group-flush m-1"></ul>
@@ -44,6 +44,7 @@
           new_task.textContent = task_name.value;
           list.appendChild(new_task);
           task_name.value = "";
+          task_name.focus();
 
           let remove_task = document.createElement("button");
           remove_task.setAttribute("class","btn btn-sm btn-close position-absolute top-50 start-100 translate-middle");
