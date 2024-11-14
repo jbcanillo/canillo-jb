@@ -21,8 +21,8 @@
 // Your code implementation goes here:
 
 // Task 1: Use arrow functions to calculate the square of a given number and log the result to the console.
-const squareRoot = (num) => num * num;
-console.log("Square root of 9 is ", squareRoot(9));
+const square = (num) => num * num;
+console.log("Square of 9 is ", square(9));
 
 // Task 2: Use template literals to create a welcome message that includes the name and age of a person.
 const person = { name: "Jack", age: 99 };
