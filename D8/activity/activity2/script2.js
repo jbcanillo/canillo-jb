@@ -36,7 +36,8 @@ console.log("Person's lastname:", lastName);
 // Task 4: Use the spread operator to merge two arrays into a single array.
 const arrA = ["aaa", "222", 333, { num: 444 }];
 const arrB = ["bbb", "333", 444, { msg: "Hello JS!" }];
-console.log("Merged:", [...arrA, ...arrB]);
+const mergedArr = [...arrA, ...arrB];
+console.log("Merged:", mergedArr);
 
 // Task 5: Use default parameters to create a function that calculates the area of a rectangle.
 const calculateArea = (length = 4, width = 2) => length * width;
