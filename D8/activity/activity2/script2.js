@@ -25,13 +25,13 @@ const square = (num) => num * num;
 console.log("Square of 9 is ", square(9));
 
 // Task 2: Use template literals to create a welcome message that includes the name and age of a person.
-const person = { name: "Jack", age: 99 };
+const person = { name: "Jack", age: 9999, lastname: "Ripper" };
 console.log(`Hi! my name is ${person.name} and I'm ${person.age} years old.`);
 
 // Task 3: Use destructuring to extract the first and last name from a person object and log them to the console.
-const { name: personName, age: personAge } = person;
-console.log("Person's name:", personName);
-console.log("Person's age:", personAge);
+const { name: firstName, lastname: lastName } = person;
+console.log("Person's firstname:", firstName);
+console.log("Person's lastname:", lastName);
 
 // Task 4: Use the spread operator to merge two arrays into a single array.
 const arrA = ["aaa", "222", 333, { num: 444 }];
