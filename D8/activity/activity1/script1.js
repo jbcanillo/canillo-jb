@@ -20,10 +20,10 @@
 // Your code implementation goes here:
 
 // Calculate the square root of a given number
-const square = (num) => {
-    return num * num;
+const squareRoot = (num) => {
+    return Math.sqrt(num);
 }
-console.log("Square of 3 is ",square(3));
+console.log("Square root of 81 is ",squareRoot(81));
 
 // Generate a random number between 1 and 10
 const randomNumber = (min, max) => {
