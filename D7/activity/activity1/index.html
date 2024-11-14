@@ -17,15 +17,15 @@
         <div class="card-header"><h2>Loan Calculator</h2></div>
         <div class="card-body">
           <div class="col-12">
-            <label for="loan-amount">Loan Amount:</label>
+            <label for="loan-amount">*Loan Amount:</label>
             <input type="number" class="form-control" id="loan-amount" />
           </div>
           <div class="col-12">
-            <label for="loan-rate">Interest Rate (%):</label>
+            <label for="loan-rate">*Interest Rate (%):</label>
             <input type="number" class="form-control" id="loan-rate" />
           </div>
           <div class="col-12">
-            <label for="loan-years">Loan Terms (years):</label>
+            <label for="loan-years">*Loan Terms (years):</label>
             <input type="number" class="form-control" id="loan-years" />
           </div>
           <div class="col-12 mt-2">
@@ -38,18 +38,49 @@
       <div class="card mt-3 col-12">
         <div class="card-header">Monthly Payment:</div>
         <div class="card-body">
-          <h2 id="payment">--</h2>
+          <h2 id="monthly_payment">--</h2>
         </div>
       </div>
     </div>
     <script type="text/javascript">
       document.querySelector("#calculate").addEventListener("click", () => {
         const loan_amount = parseFloat(document.querySelector("#loan-amount").value);
-        const loan_rate = parseFloat(document.querySelector("#loan-rate").value) / 100 / 12; 
-        const loan_years = parseFloat(document.querySelector("#loan-years").value) * 12;
-        const payment = (loan_amount * loan_rate) / (1 - Math.pow(1 + loan_rate, -loan_years));
-        console.log(payment);
-        document.querySelector("#payment").textContent = "$"+payment.toFixed(2);
+        const loan_rate = parseFloat(document.querySelector("#loan-rate").value);
+        const loan_years = parseFloat(document.querySelector("#loan-years").value);
+        const monthly_payment = document.querySelector("#monthly_payment");
+
+        if (
+          isNaN(loan_amount) ||
+          isNaN(loan_rate) ||
+          isNaN(loan_years) ||
+          loan_amount <= 0 ||
+          loan_rate <= 0 ||
+          loan_years <= 0
+        ) {
+          monthly_payment.textContent = "Pls. fill all required fields (*)";
+          return;
+        }
+
+        const monthly_interest = loan_rate / 100 / 12;
+        console.log("Interest Rate:", monthly_interest);
+
+        const total_months = loan_years * 12;
+        console.log("Total months:", total_months);
+
+        const total_interest = loan_amount * monthly_interest;
+        console.log("Principal + Interest:", total_interest);
+
+        let factor = 1;
+        for (let i = 0; i < total_months; i++) {
+          factor *= 1 + monthly_interest;
+        }
+        const factorial = 1 - 1 / factor;
+        console.log("Factorial:", factor);
+
+        const amortization = total_interest / factorial;
+        console.log("Amortization:", amortization);
+
+        monthly_payment.textContent = "$" + amortization.toFixed(2);
       });
     </script>
     <script
