@@ -74,10 +74,10 @@
         for (let i = 0; i < total_months; i++) {
           factor *= 1 + monthly_interest;
         }
-        const factorial = 1 - 1 / factor;
-        console.log("Factorial:", factor);
+        const discount_factor = 1 - 1 / factor;
+        console.log("Discount Factor:", discount_factor);
 
-        const amortization = total_interest / factorial;
+        const amortization = total_interest / discount_factor;
         console.log("Amortization:", amortization);
 
         monthly_payment.textContent = "$" + amortization.toFixed(2);
