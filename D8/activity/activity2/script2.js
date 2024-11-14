@@ -40,7 +40,7 @@ const mergedArr = [...arrA, ...arrB];
 console.log("Merged:", mergedArr);
 
 // Task 5: Use default parameters to create a function that calculates the area of a rectangle.
-const calculateArea = (length = 4, width = 2) => length * width;
+const calculateArea = (length = 1, width = 1) => length * width;
 console.log("The are of the rectangle is ", calculateArea());
 
 // Task 6: Create a class called "Person" with properties for name and age, and a method to introduce the person. Instantiate an object of the class and call the introduce method.
