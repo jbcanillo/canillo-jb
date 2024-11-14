@@ -68,13 +68,14 @@
 
       const products_list = document.querySelector("#products-list");
       const cart_list = document.querySelector("#cart-list");
+      const cart_total =  document.querySelector("#total-amount");
       let cart_items = [];
 
       products.forEach((product) => {
         let item = document.createElement("li");
         item.setAttribute("class", "list-group-item");
         item.setAttribute("id", product.id);
-        item.textContent = product.name + " | Price: " + product.price;
+        item.innerHTML = "<b>" + product.name + "</b> (Price: $" + product.price + ")";
         products_list.appendChild(item);
 
         let add = document.createElement("button");
@@ -123,12 +124,7 @@
                 let item = document.createElement("li");
                 item.setAttribute("class", "list-group-item");
                 item.setAttribute("id", product.id);
-                item.textContent =
-                    product.name +
-                    " | Price: " +
-                    product.price +
-                    " | Qty: " +
-                    product.qty;
+                item.innerHTML = "<b>" + product.name + "</b> @ $" + product.price + " x Qty: " + product.qty + " = $" + (product.price * product.qty);
                 cart_list.appendChild(item);
 
                 let remove_item = document.createElement("button");
@@ -141,10 +137,10 @@
 
                 total_amount += parseFloat(product.price * product.qty);
             });
-            document.querySelector("#total-amount").textContent = total_amount.toFixed(2);
+            cart_total.textContent = total_amount.toFixed(2);
         }else{
             cart_list.innerHTML = "<li class='list-group-item text-center'>Empty</li>";
-            document.querySelector("#total-amount").textContent = "0.00";
+            cart_total.textContent = "0.00";
         }
       }
     </script>
