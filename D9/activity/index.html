@@ -13,10 +13,10 @@
   </head>
   <body>
     <div class="container-fluid">
-      <h2 class="text-center">Product List</h2>
+      <h1 class="text-center p-5">Product List</h1>
     </div>
     <div class="container">
-      <div class="row d-flex" id="product-gallery"></div>
+      <div class="row row-cols-1 row-cols-md-3 g-4" id="product-gallery"></div>
     </div>
     <script type="text/javascript">
       const fetchProducts = async () => {
@@ -27,18 +27,18 @@
             let html = "";
             products.forEach((product) => {
               html += `
-                    <div class="col-4 mb-4">
-                        <div class="card h-100 w-30">
+                    <div class="col-4">
+                        <div class="card h-100">
                             <img class="card-img-top" src="${
                               product.image
-                            }" alt="${product.title}" style="height:20rem">
-                            <div class="card-body  p-4">
+                            }" alt="${product.title}" style="height: 20rem; width: 100%; object-fit: contain">
+                            <div class="card-body p-4">
                                 <h5 class="card-title text-fluid">${
                                   product.title
                                 }</h5>
-                                <p class="card-text text-muted">$${
+                                <h6 class="card-text text-muted">$${
                                   product.price
-                                }</p>
+                                }</h6>
                                 <p class="card-text justify-align-items">${truncateText(
                                   product.description,
                                   200
