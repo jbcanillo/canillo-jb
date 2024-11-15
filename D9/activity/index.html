@@ -19,6 +19,7 @@
       <div class="row row-cols-1 row-cols-md-3 g-4" id="product-gallery"></div>
     </div>
     <script type="text/javascript">
+      const productGallery = document.querySelector("#product-gallery");
       const fetchProducts = async () => {
         try {
           const response = await fetch("https://fakestoreapi.com/products");
@@ -29,31 +30,22 @@
               html += `
                     <div class="col-4">
                         <div class="card h-100">
-                            <img class="card-img-top" src="${
-                              product.image
-                            }" alt="${product.title}" style="height: 20rem; width: 100%; object-fit: contain">
+                            <img class="card-img-top" src="${product.image}" alt="${product.title}" style="height: 20rem; width: 100%; object-fit: contain">
                             <div class="card-body p-4">
-                                <h5 class="card-title text-fluid">${
-                                  product.title
-                                }</h5>
-                                <h6 class="card-text text-muted">$${
-                                  product.price
-                                }</h6>
-                                <p class="card-text justify-align-items">${truncateText(
-                                  product.description,
-                                  200
-                                )}</p>
+                                <h5 class="card-title text-fluid">${product.title}</h5>
+                                <h6 class="card-text text-muted">$${product.price}</h6>
+                                <p class="card-text justify-align-items">${truncateText(product.description,200)}</p>
                             </div>
                         </div>
                     </div>
                     `;
             });
-            document.querySelector("#product-gallery").innerHTML = html;
+            productGallery.innerHTML = html;
           } else {
             throw new Error("Failed to fetch data.");
           }
         } catch (error) {
-          console.log("An error occurred!", error);
+          productGallery.innerHTML = '<div class="container"><h4 class="text-center">Oops! 404 not found. Kindly refresh this page.</h4></div>';
         }
       };
       function truncateText(paragraphText, maxLength) {
