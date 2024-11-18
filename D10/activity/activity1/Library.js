@@ -43,7 +43,7 @@ export class Library {
     if (this.books.length === 0) {
       console.log("No books in the library.");
     } else {
-      console.log("These are the books in the library:");
+      console.log(`There are ${this.books.length} book(s) in the library:`);
       this.books.forEach((book) => {
         book.displayInfo();
       });
