@@ -1,0 +1,67 @@
+// Step 1: Create a new MongoDB Atlas cluster and connect to it using MongoDB Compass .
+
+// Step 2: In MongoDB Compass, create a new database called "Bookstore" and a collection called "Books".
+
+// Step 3: Perform the following CRUD operations using MongoDB Compass:
+
+// a) Create Operation:
+// Insert at least three book documents with different fields such as title, author, genre, and publication year.
+> db.Books.insertMany([
+    {
+        title: "The 1st Book",
+        author: "Author One",
+        genre: "Novel",
+        publishYear: "2000"
+    },
+    {
+        title: "The 2nd Book",
+        author: "Author Two",
+        genre: "Drama",
+        publishYear: "2001"
+    },
+    {
+        title: "The 3rd Book",
+        author: "Author Three",
+        genre: "Fiction",
+        publishYear: "2002"
+    }
+])
+
+// b) Read Operation:
+// Retrieve all the book documents in the "Books" collection.
+> db.Books.find()
+
+// Retrieve a specific book document based on its title or author.
+> db.Books.find({title:"The 3rd Book"},{_id:0})
+> db.Books.find({author:"Author One"},{_id:0})
+
+// c) Update Operation:
+// Update the genre of a book document.
+> db.Books.updateOne({title:"The 3rd Book"},{$set: { genre: "Horror" }})
+
+// Update the publication year of a book document.
+> db.Books.updateOne({title:"The 1st Book"},{$set: { publishedYear: 2024 }})
+
+// d) Delete Operation:
+// Delete a book document based on its title or author.
+> db.Books.deleteOne({title:"The 2nd Book"})
+
+// Step 4: After each operation, verify the changes by re-reading the data from the "Books" collection.
+{
+  _id: ObjectId('673c9144063d3b60678ae2d7'),
+  title: 'The 1st Book',
+  author: 'Author One',
+  genre: 'Novel',
+  publishYear: '2024'
+}
+{
+  _id: ObjectId('673c9144063d3b60678ae2d9'),
+  title: 'The 3rd Book',
+  author: 'Author Three',
+  genre: 'Horror',
+  publishYear: '2002',
+  publishedYear: 2002
+}
+
+// Note: Remember to clean up the cluster and delete the "Bookstore" database if no longer needed.
+
