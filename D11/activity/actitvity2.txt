@@ -11,19 +11,19 @@
         title: "The 1st Book",
         author: "Author One",
         genre: "Novel",
-        publishYear: "2000"
+        publishYear: 2000
     },
     {
         title: "The 2nd Book",
         author: "Author Two",
         genre: "Drama",
-        publishYear: "2001"
+        publishYear: 2001
     },
     {
         title: "The 3rd Book",
         author: "Author Three",
         genre: "Fiction",
-        publishYear: "2002"
+        publishYear: 2002
     }
 ])
 
@@ -59,8 +59,7 @@
   title: 'The 3rd Book',
   author: 'Author Three',
   genre: 'Horror',
-  publishYear: '2002',
-  publishedYear: 2002
+  publishYear: '2002'
 }
 
 // Note: Remember to clean up the cluster and delete the "Bookstore" database if no longer needed.
