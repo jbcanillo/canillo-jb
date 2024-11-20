@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "673ddc752f1e1519f3e5f830"
+  },
+  "name": "Alice Johnson",
+  "email": "alice.j@example.com",
+  "enrolledCourses": [
+    {
+      "$oid": "673dde412f1e1519f3e5f83d"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "673ddc752f1e1519f3e5f831"
+  },
+  "name": "Bob Brown",
+  "email": "bob.b@example.com",
+  "enrolledCourses": [
+    {
+      "$oid": "673dde412f1e1519f3e5f83d"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "673ddc752f1e1519f3e5f832"
+  },
+  "name": "Charlie White",
+  "email": "charlie.w@example.com",
+  "enrolledCourses": [
+    {
+      "$oid": "673dde412f1e1519f3e5f83e"
+    }
+  ]
+}]
