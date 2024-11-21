@@ -1,4 +1,4 @@
-Retrieve all courses in the "Programming" category.
+1. Retrieve all courses in the "Programming" category.
 > db.courses.aggregate([
     {
         $lookup: {
@@ -20,7 +20,8 @@ Retrieve all courses in the "Programming" category.
     }
 ])
 
-Retrieve all students enrolled in the course "Introduction to MongoDB".
+
+2. Retrieve all students enrolled in the course "Introduction to MongoDB".
 > db.students.aggregate([
     {
         $lookup: {
@@ -36,13 +37,15 @@ Retrieve all students enrolled in the course "Introduction to MongoDB".
     {
         $project: { 
             name: 1,
+            email: 1,
             enrolled_courses: "$_course.title",
             _id: 0 
         }
     }
 ])
 
-Retrieve course details, including category and instructor information, for all courses.
+
+3. Retrieve course details, including category and instructor information, for all courses.
 > db.courses.aggregate([
     {
         $lookup: {
@@ -65,34 +68,54 @@ Retrieve course details, including category and instructor information, for all 
             title: 1, 
             category_name: "$_category.name",
             instructor_name: "$_instructor.name",
+            instructor_email: "$_instructor.email",
             _id: 0 
         }
     }
 ])
 
-Retrieve all reviews for the course "Data Science with Python," including the details of the students who wrote them.
-> db.courses.find(
+
+4. Retrieve all reviews for the course "Data Science with Python," including the details of the students who wrote them.
+> db.courses.aggregate([
     {
-        title:"Data Science with Python"
+        $lookup: {
+            from: "students",
+            localField: "reviews.student",
+            foreignField: "_id",
+            as: "_student"
+        }
     },
     {
-       title: 1,
-       reviews:1 
-    })
+        $match: { "title": "Data Science with Python" }
+    },
+    {
+        $project: {
+            title: 1,
+            rating: "$reviews.rating",
+            comment: "$reviews.comment",
+            student_name: "$_student.name",
+            student_email: "$_student.email",
+            _id: 0 
+        }
+    }
+])
 
-Find the average rating for each course.
+
+5. Find the average rating for each course.
 > db.courses.aggregate([
   {
     $project: {
       title: 1, 
       average_rating: { 
         $avg: "$reviews.rating"
-      }
+      },
+      _id: 0
     }
   }
 ])
 
-Retrieve all courses taught by the instructor "Jane Doe".
+
+6. Retrieve all courses taught by the instructor "Jane Doe".
 > db.courses.aggregate([
     {
         $lookup: {
@@ -114,7 +137,8 @@ Retrieve all courses taught by the instructor "Jane Doe".
     }
 ])
 
-Count the number of courses in each category.
+
+7. Count the number of courses in each category.
 > db.courses.aggregate([
     {
         $group: {
@@ -132,14 +156,15 @@ Count the number of courses in each category.
     },
     {
         $project: { 
-            name: "$_category.name",
+            category_name: "$_category.name",
             count: 1,
             _id: 0 
         }
     }
 ])
 
-Find all students who have reviewed the course "Introduction to MongoDB".
+
+8. Find all students who have reviewed the course "Introduction to MongoDB".
 > db.students.aggregate([
     {
         $lookup: {
@@ -156,12 +181,15 @@ Find all students who have reviewed the course "Introduction to MongoDB".
         $project: { 
             name: 1,
             email: 1,
+            rating: "$_course.reviews.rating",
+            comment: "$_course.reviews.comment",
             _id: 0
         }
     }
 ])
 
-Retrieve the titles of all courses where the average rating is above 4.
+
+9. Retrieve the titles of all courses where the average rating is above 4.
 > db.courses.aggregate([
     {
         $project: {
@@ -176,7 +204,8 @@ Retrieve the titles of all courses where the average rating is above 4.
     }
 ])
 
-Retrieve all students who are enrolled in courses taught by "John Smith".
+
+10. Retrieve all students who are enrolled in courses taught by "John Smith".
 > db.students.aggregate([
     {
         $lookup: {
@@ -199,6 +228,8 @@ Retrieve all students who are enrolled in courses taught by "John Smith".
     },
     {
         $project: { 
+            course_title: "$_course.title",
+            instructor: "$_instructor.name",
             name: 1,
             email: 1,
             _id: 0
