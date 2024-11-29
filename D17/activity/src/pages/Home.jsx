@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Home = () => {
   return (
-    <div>
+    <div className="page" style={{ fontSize: "8vh" }}>
       <h1>Welcome to our website!</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
