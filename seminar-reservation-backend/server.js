@@ -11,8 +11,16 @@ import bookingRoutes from "./routes/bookingRoutes.js";
 dotenv.config();
 connectDB();
 
+// CORS configuration
+const corsOptions = {
+  origin: "http://localhost:5173", // The origin of your frontend (adjust the port if necessary)
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Allow cookies to be sent if needed
+};
+
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
