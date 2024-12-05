@@ -24,7 +24,6 @@ const Login = () => {
         "http://localhost:5000/api/auth/login",
         userCredentials
       );
-
       if (response.status === 200) {
         const userData = response.data;
         login(userData);

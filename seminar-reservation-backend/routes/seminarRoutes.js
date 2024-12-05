@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get("/", getSeminars);
 router.get("/:id", getSeminarDetails);
-router.post("/", authMiddleware, adminMiddleware, createSeminar);
+router.post("/",  createSeminar);
 router.put("/:id", authMiddleware, adminMiddleware, updateSeminar);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteSeminar);
 

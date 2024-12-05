@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import { useToast } from "../providers/ToastContext";
 
 const SeminarManagement = () => {
+  const navigate = useNavigate();
+  const { showToastMessage } = useToast();
   const [seminars, setSeminars] = useState([]);
   const [newSeminar, setNewSeminar] = useState({
     title: "",
@@ -34,6 +38,11 @@ const SeminarManagement = () => {
         setSeminars([...seminars, response.data]);
         setNewSeminar({ firstName: "", lastName: "", email: "", role: "seminar" });
         setIsFormVisible(false);
+        showToastMessage(
+          "New Seminar was added.",
+          "success"
+        );
+        navigate("/manage_seminars");
       })
       .catch((error) => {
         console.error("Error creating seminar:", error);
@@ -72,6 +81,7 @@ const SeminarManagement = () => {
       });
   };
 
+
   return (
     <section>
       <h1>Seminar Management </h1>
@@ -85,7 +95,7 @@ const SeminarManagement = () => {
         Add
       </button>
 
-      {/* Create New Seminar Form*/}
+      {/* Create New Seminar Form */}
       {isFormVisible && (
         <div className="card bg-base-100 w-auto shadow-xl card-compact">
           <div className="form-container">
@@ -132,7 +142,7 @@ const SeminarManagement = () => {
                 }
                 required
               />
-               <label>Time From*</label>
+              <label>Time From*</label>
               <input
                 className="input input-bordered w-full"
                 type="time"
@@ -140,12 +150,12 @@ const SeminarManagement = () => {
                 value={editSeminar ? editSeminar.timeFrame.from : newSeminar.timeFrame.from}
                 onChange={(e) =>
                   editSeminar
-                    ? setEditSeminar({ ...editSeminar, time_from: e.target.value })
-                    : setNewSeminar({ ...newSeminar, time_from: e.target.value })
+                    ? setEditSeminar({ ...editSeminar, timeFrame: { ...editSeminar.timeFrame, from: e.target.value } })
+                    : setNewSeminar({ ...newSeminar, timeFrame: { ...newSeminar.timeFrame, from: e.target.value } })
                 }
                 required
               />
-               <label>Time To*</label>
+              <label>Time To*</label>
               <input
                 className="input input-bordered w-full"
                 type="time"
@@ -153,12 +163,12 @@ const SeminarManagement = () => {
                 value={editSeminar ? editSeminar.timeFrame.to : newSeminar.timeFrame.to}
                 onChange={(e) =>
                   editSeminar
-                    ? setEditSeminar({ ...editSeminar, time_to: e.target.value })
-                    : setNewSeminar({ ...newSeminar, time_to: e.target.value })
+                    ? setEditSeminar({ ...editSeminar, timeFrame: { ...editSeminar.timeFrame, to: e.target.value } })
+                    : setNewSeminar({ ...newSeminar, timeFrame: { ...newSeminar.timeFrame, to: e.target.value } })
                 }
                 required
               />
-               <label>Venue*</label>
+              <label>Venue*</label>
               <input
                 className="input input-bordered w-full"
                 type="text"
@@ -179,8 +189,8 @@ const SeminarManagement = () => {
                 value={editSeminar ? editSeminar.speaker.name : newSeminar.speaker.name}
                 onChange={(e) =>
                   editSeminar
-                    ? setEditSeminar({ ...editSeminar, speaker: e.target.value })
-                    : setNewSeminar({ ...newSeminar, speaker: e.target.value })
+                    ? setEditSeminar({ ...editSeminar, speaker: { ...editSeminar.speaker, name: e.target.value } })
+                    : setNewSeminar({ ...newSeminar, speaker: { ...newSeminar.speaker, name: e.target.value } })
                 }
                 required
               />
@@ -188,16 +198,16 @@ const SeminarManagement = () => {
               <input
                 className="input input-bordered w-full"
                 type="file"
-                placeholder="Speaker"
-                value={editSeminar ? editSeminar.image : newSeminar.image}
+                placeholder="Speaker Image"
+                value={editSeminar ? editSeminar.speaker.image : newSeminar.speaker.image}
                 onChange={(e) =>
                   editSeminar
-                    ? setEditSeminar({ ...editSeminar, image: e.target.value })
-                    : setNewSeminar({ ...newSeminar, image: e.target.value })
+                    ? setEditSeminar({ ...editSeminar, speaker: { ...editSeminar.speaker, image: e.target.value } })
+                    : setNewSeminar({ ...newSeminar, speaker: { ...newSeminar.speaker, image: e.target.value } })
                 }
                 required
               />
-               <label>LinkedIn URL*</label>
+              <label>LinkedIn URL*</label>
               <input
                 className="input input-bordered w-full"
                 type="text"
@@ -205,12 +215,12 @@ const SeminarManagement = () => {
                 value={editSeminar ? editSeminar.speaker.linkedin : newSeminar.speaker.linkedin}
                 onChange={(e) =>
                   editSeminar
-                    ? setEditSeminar({ ...editSeminar, linkedin: e.target.value })
-                    : setNewSeminar({ ...newSeminar, linkedin: e.target.value })
+                    ? setEditSeminar({ ...editSeminar, speaker: { ...editSeminar.speaker, linkedin: e.target.value } })
+                    : setNewSeminar({ ...newSeminar, speaker: { ...newSeminar.speaker, linkedin: e.target.value } })
                 }
                 required
               />
-               <label>Fee*</label>
+              <label>Fee*</label>
               <input
                 className="input input-bordered w-full"
                 type="number"
@@ -223,7 +233,7 @@ const SeminarManagement = () => {
                 }
                 required
               />
-               <label>Available Slots*</label>
+              <label>Available Slots*</label>
               <input
                 className="input input-bordered w-full"
                 type="number"

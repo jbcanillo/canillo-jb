@@ -23,13 +23,23 @@ const UserManagement = () => {
       });
   }, []);
 
+  // Get Authorization token from localStorage
+  const getAuthToken = () => localStorage.getItem("authToken");
+
   // Create new user
   const handleCreate = () => {
-    Axios.post("http://localhost:5000/api/users", newUser)
+    Axios.post("http://localhost:5000/auth/register", newUser)
       .then((response) => {
-        setUsers([...users, response.data]);
-        setNewUser({ firstName: "", lastName: "", email: "", role: "user" });
-        setIsFormVisible(false);
+        if (response.status === 201) {
+          setUsers((prevUsers) => [...prevUsers, response.data]);
+          setNewUser({
+            firstName: "",
+            lastName: "",
+            email: "",
+            role: "user",
+          });
+          setIsFormVisible(false);
+        }
       })
       .catch((error) => {
         console.error("Error creating user:", error);
@@ -42,35 +52,57 @@ const UserManagement = () => {
     setIsFormVisible(true);
   };
 
+  // Update user
   const handleUpdate = () => {
-    Axios.put(`http://localhost:5000/api/users/${editUser.id}`, editUser)
-      .then((response) => {
-        const updatedUsers = users.map((user) =>
-          user.id === editUser.id ? response.data : user
-        );
-        setUsers(updatedUsers);
-        setEditUser(null);
-        setIsFormVisible(false);
+    const authToken = getAuthToken();
+
+    if (authToken) {
+      Axios.put(`http://localhost:5000/api/users/${editUser.id}`, editUser, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
       })
-      .catch((error) => {
-        console.error("Error updating user:", error);
-      });
+        .then((response) => {
+          setUsers((prevUsers) =>
+            prevUsers.map((user) =>
+              user.id === editUser.id ? response.data : user
+            )
+          );
+          setEditUser(null);
+          setIsFormVisible(false);
+        })
+        .catch((error) => {
+          console.error("Error updating user:", error);
+        });
+    } else {
+      console.log("No auth token found");
+    }
   };
 
   // Delete user
   const handleDelete = (id) => {
-    Axios.delete(`http://localhost:5000/api/users/${id}`)
-      .then(() => {
-        setUsers(users.filter((user) => user.id !== id));
+    const authToken = getAuthToken();
+
+    if (authToken) {
+      Axios.delete(`http://localhost:5000/api/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
       })
-      .catch((error) => {
-        console.error("Error deleting user:", error);
-      });
+        .then(() => {
+          setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+        })
+        .catch((error) => {
+          console.error("Error deleting user:", error);
+        });
+    } else {
+      console.log("No auth token found");
+    }
   };
 
   return (
     <section>
-      <h1>User Management </h1>
+      <h1>User Management</h1>
       <button
         onClick={() => {
           setIsFormVisible(true);
@@ -81,7 +113,7 @@ const UserManagement = () => {
         Add
       </button>
 
-      {/* Create New User Form*/}
+      {/* Create New User Form */}
       {isFormVisible && (
         <div className="card bg-base-100 w-auto shadow-xl card-compact">
           <div className="form-container">
@@ -192,7 +224,7 @@ const UserManagement = () => {
                     </button>
                     <button
                       className="btn btn-error btn-xs"
-                      onClick={() => handleDelete(user.id)}
+                      onClick={() => handleDelete(user._id)}
                     >
                       Delete
                     </button>

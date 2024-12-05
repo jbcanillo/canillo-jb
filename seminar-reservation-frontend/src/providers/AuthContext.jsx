@@ -20,12 +20,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // Login function to set user and authentication state
-  const login = (userData, token) => {
+  const login = (userData) => {
     setUser(userData);
     setIsAuthenticated(true);
     
     // Store user and token in localStorage
-    localStorage.setItem('authToken', token);
+    localStorage.setItem('authToken', userData.token);
     localStorage.setItem('user', JSON.stringify(userData.user));
   };
 
