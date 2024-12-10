@@ -1,23 +1,24 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx"; // Changed .tsx to .jsx
 import "./index.css";
-import App from "./App.jsx";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { AppContextProvider } from "./contexts/AppContext.jsx"; // Changed .tsx to .jsx
 
-// Create a new QueryClient instance
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 0, // Disable retry on failed queries
+      retry: 0,
     },
   },
 });
 
-// Render the app
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render( // Removed "!" from getElementById
+  <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>
     </QueryClientProvider>
-  </StrictMode>
+  </React.StrictMode>
 );

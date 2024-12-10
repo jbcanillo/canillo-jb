@@ -5,7 +5,7 @@
 /D17/activity/node_modules
 /D18/lesson/node_modules
 /D18/activity/node_modules
-/seminar-reservation-backend/node_modules
-/seminar-reservation-frontend/node_modules
+/seminar-reservation-app/backend/node_modules
+/seminar-reservation-app/frontend/node_modules
 /mern-hotel-app/frontend/node_modules
 /mern-hotel-app/backend/node_modules

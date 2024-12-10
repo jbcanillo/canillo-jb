@@ -1,38 +1,50 @@
-import React from "react";
-import { useForm } from "react-hook-form"; // Import `useForm` for form handling
-import { useMutation } from "react-query"; // Import `useMutation` for managing API requests
-import * as apiClient from "../api-client"; // Import API functions from `api-client`
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
+import * as apiClient from '../api-client';
+import { useAppContext } from '../contexts/AppContext';
+import { useNavigate } from 'react-router-dom';
 
-// Data structure for the registration form
 export const RegisterFormData = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
 
 const Register = () => {
+    // to redirect after registration
+
+    const queryClient = useQueryClient();
+    const navigate = useNavigate()
+    const {showToast} = useAppContext();
   const {
-    register, // Registers input fields with validation rules
-    watch, // Watches input field values (useful for dynamic validation)
-    handleSubmit, // Wraps the form submission with validation logic
-    formState: { errors }, // Provides validation errors for fields
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
   } = useForm();
 
-  // Define a mutation to handle the registration API call
-  const mutation = useMutation(apiClient.register, {
-    onSuccess: () => {
-      console.log("Registration successful!");
+const mutation = useMutation(apiClient.register, {
+    onSuccess: async () => {
+        // console.log("registration succesful!")
+        showToast({ message: "Registration succesful", type: "SUCCESS" })
+        await queryClient.invalidateQueries("validateToken");
+        // to redirect to home after registration
+        navigate("/")
+
     },
     onError: (error) => {
-      console.error(error.message); // Log errors to the console
-    },
-  });
+        // console.log(error.message)
+        showToast({ message: error.message, type: "ERROR"})
 
-  // Form submission handler
+    }
+})
+
   const onSubmit = handleSubmit((data) => {
-    mutation.mutate(data); // Trigger the mutation with form data
+    // console.log(data);
+    mutation.mutate(data)
   });
 
   return (
@@ -43,7 +55,7 @@ const Register = () => {
           First Name
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            {...register("firstName", { required: "This field is required" })}
+            {...register('firstName', { required: 'This field is required' })}
           />
           {errors.firstName && (
             <span className="text-red-500">{errors.firstName.message}</span>
@@ -53,7 +65,7 @@ const Register = () => {
           Last Name
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            {...register("lastName", { required: "This field is required" })}
+            {...register('lastName', { required: 'This field is required' })}
           />
           {errors.lastName && (
             <span className="text-red-500">{errors.lastName.message}</span>
@@ -65,7 +77,7 @@ const Register = () => {
         <input
           type="email"
           className="border rounded w-full py-1 px-2 font-normal"
-          {...register("email", { required: "This field is required" })}
+          {...register('email', { required: 'This field is required' })}
         />
         {errors.email && (
           <span className="text-red-500">{errors.email.message}</span>
@@ -76,11 +88,11 @@ const Register = () => {
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
-          {...register("password", {
-            required: "This field is required",
+          {...register('password', {
+            required: 'This field is required',
             minLength: {
               value: 6,
-              message: "Password must be at least 6 characters",
+              message: 'Password must be at least 6 characters',
             },
           })}
         />
@@ -93,12 +105,12 @@ const Register = () => {
         <input
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
-          {...register("confirmPassword", {
+          {...register('confirmPassword', {
             validate: (val) => {
               if (!val) {
-                return "This field is required";
-              } else if (watch("password") !== val) {
-                return "Your passwords do not match";
+                return 'This field is required';
+              } else if (watch('password') !== val) {
+                return 'Your passwords do not match';
               }
             },
           })}
