@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const ToastMsg = ({ message, type, onClose }) => {
@@ -16,14 +16,18 @@ const ToastMsg = ({ message, type, onClose }) => {
 
   if (!isVisible) return null;
 
+  // Ensure the type is a valid class name for DaisyUI
+  const validTypes = ["success", "error", "warning", "info"];
+  const toastType = validTypes.includes(type) ? type : "info"; // Default to "info" if type is invalid
+
   return (
     <motion.div
-      className={`toast toast-center toast-bottom z-50`}
-      initial={{ opacity: 0, y: -20 }}
+      className={`toast toast-top`}
+      initial={{ opacity: 0, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      exit={{ opacity: 0, y: 0 }}
     >
-      <div className={`alert alert-${type || "info"} shadow-lg`}>
+      <div className={`alert alert-${toastType} shadow-lg`}>
         <div>
           <span>{message}</span>
         </div>

@@ -1,9 +1,14 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ToastProvider } from "./contexts/ToastContext";
-import NavBar from "./components/NavBar";
+import Layout from "./layouts/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -12,24 +17,68 @@ import SeminarManagement from "./pages/SeminarManagement";
 import BookingManagement from "./pages/BookingManagement";
 
 function App() {
-
   useEffect(() => {
-    document.title = "Sranimes";
+    document.title = "Zemina";
   }, []);
 
   return (
     <AuthProvider>
       <ToastProvider>
         <Router>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/manage_users" element={<UserManagement />} />
-            <Route path="/manage_seminars" element={<SeminarManagement />} />
-            <Route path="/manage_bookings" element={<BookingManagement />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
+          <div>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Layout>
+                    <Home />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/manage_users"
+                element={
+                  <Layout>
+                    <UserManagement />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/manage_seminars"
+                element={
+                  <Layout>
+                    <SeminarManagement />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/manage_bookings"
+                element={
+                  <Layout>
+                    <BookingManagement />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <Layout>
+                    <Login />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <Layout>
+                    <Register />
+                  </Layout>
+                }
+              />
+              {/* Catch-all Route */}
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </div>
         </Router>
       </ToastProvider>
     </AuthProvider>

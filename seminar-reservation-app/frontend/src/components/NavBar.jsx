@@ -14,7 +14,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-100 shadow-lg" id="app-nav-bar">
       <div className="flex-1">
-        <a className="btn text-xl">Sranimes</a>
+        <a className="btn text-xl">Zemina</a>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
@@ -22,8 +22,8 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </li>
 
-          {/* Only show Management if the user is authenticated */}
-          {isAuthenticated && (
+          {/* Only show Management if the user is authenticated as admin */}
+          {isAuthenticated && user.role==='admin' && (
             <li>
               <details>
                 <summary>Management</summary>
@@ -46,11 +46,11 @@ const NavBar = () => {
 
       <div className="flex-none gap-2">
         <div className="form-control">
-          {/* <input
+          <input
             type="text"
             placeholder="Search"
             className="input input-bordered w-24 md:w-auto"
-          /> */}
+          />
         </div>
         {/* Show the user avatar and profile link if authenticated */}
         {isAuthenticated ? (
