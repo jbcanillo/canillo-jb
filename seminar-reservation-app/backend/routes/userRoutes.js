@@ -3,6 +3,8 @@ import {
   getUsers,
   createUser,
   sendPassword,
+  updateUser,
+  deleteUser,
   getProfile,
   updateProfile,
 } from "../controllers/userController.js";
@@ -14,7 +16,9 @@ const router = express.Router();
 router.get("/", authMiddleware, adminMiddleware, getUsers);
 router.post("/", authMiddleware, adminMiddleware, createUser);
 router.post("/sendPassword", authMiddleware, adminMiddleware, sendPassword);
+router.put("/:id", authMiddleware, adminMiddleware, updateUser);
+router.delete("/:id", authMiddleware, adminMiddleware, deleteUser);
 router.get("/profile", authMiddleware, getProfile);
-router.put("/profile", authMiddleware, updateProfile);
+router.put("/profile/:id", authMiddleware, updateProfile);
 
 export default router;

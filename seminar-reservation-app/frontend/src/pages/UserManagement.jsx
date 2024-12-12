@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useToast } from "../contexts/ToastContext";
-import UserForm from "../forms/userForm";
+import UserForm from "../forms/UserForm";
 
 const generateRandomPassword = (length = 12) => {
   const charset =
@@ -21,17 +21,21 @@ const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [editUser, setEditUser] = useState(null);
 
-  // Fetch users from the API when the component mounts
-  useEffect(() => {
+  const fetchUsers = () => {
     Axios.get("http://localhost:5000/api/users", { withCredentials: true })
       .then((response) => {
-        setUsers(response.data);
+        setUsers(response.data); // Update state with fetched users
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
-        navigate("/"); // Redirect to login or home
+        navigate("/");
       });
-  }, [navigate]);
+  };
+
+  // Fetch users from the API when the component mounts
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   // Create new user
   const handleCreate = (userData) => {
@@ -40,7 +44,7 @@ const UserManagement = () => {
       ...userData,
       password: password, // Attach the generated password
     };
-  
+
     // Send user data with password to the backend
     Axios.post("http://localhost:5000/api/users", userDataWithPassword, {
       withCredentials: true,
@@ -48,59 +52,78 @@ const UserManagement = () => {
       .then((response) => {
         if (response.status === 201) {
           setUsers((prevUsers) => [...prevUsers, response.data]);
-          showToastMessage("User created successfully! A password has been sent to the user.", "success");
-  
+          showToastMessage(
+            "User created successfully! A password has been sent to the user.",
+            "success"
+          );
+          fetchUsers();
           // Send the password to the user's email through the backend
           Axios.post("http://localhost:5000/api/users/sendPassword", {
             email: userData.email,
             password: password,
           })
             .then(() => {
-              showToastMessage("Password sent to the user via email.", "success");
+              showToastMessage(
+                "Password sent to the user via email.",
+                "success"
+              );
             })
             .catch((error) => {
               console.error("Error sending email:", error);
-              showToastMessage("Error sending password via email.", "warning");
+              showToastMessage(error.response.data.error, "warning");
             });
         }
       })
       .catch((error) => {
         console.error("Error creating user:", error);
-        showToastMessage("Error creating user!", "warning");
+        showToastMessage(error.response.data.error, "error");
       });
   };
 
   // Edit user
   const handleEdit = (userData) => {
-    Axios.put(`http://localhost:5000/api/users/${editUser.id}`, userData, {
+    if (!editUser || !editUser._id) {
+      console.error("No user selected for editing");
+      showToastMessage("Error: User not selected for editing!", "error");
+      return;
+    }
+
+    Axios.put(`http://localhost:5000/api/users/${editUser._id}`, userData, {
       withCredentials: true,
     })
       .then((response) => {
-        setUsers((prevUsers) =>
-          prevUsers.map((user) =>
-            user.id === editUser.id ? response.data : user
-          )
-        );
-        showToastMessage("User updated successfully!", "success");
+        if (response.status === 200) {
+          setUsers((prevUsers) =>
+            prevUsers.map((user) =>
+              user._id === editUser._id ? response.data : user
+            )
+          );
+          showToastMessage("User updated successfully!", "success");
+          fetchUsers();
+        }
       })
       .catch((error) => {
         console.error("Error updating user:", error);
-        showToastMessage("Error updating user!", "error");
+        showToastMessage(error.response.data.error, "error");
       });
   };
 
   // Delete user
   const handleDelete = (id) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this user?");
+    if (!isConfirmed) return; // If user cancels, do nothing
+
     Axios.delete(`http://localhost:5000/api/users/${id}`, {
       withCredentials: true,
     })
       .then(() => {
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
         showToastMessage("User deleted successfully!", "success");
+        fetchUsers();
       })
       .catch((error) => {
         console.error("Error deleting user:", error);
-        showToastMessage("Error deleting user!", "warning");
+        showToastMessage(error.response.data.error, "warning");
       });
   };
 
@@ -110,6 +133,7 @@ const UserManagement = () => {
       <label
         htmlFor="user-drawer"
         className="btn btn-primary btn-xs justify-end"
+        onClick={() => setEditUser(null)}
       >
         Add
       </label>
@@ -124,6 +148,7 @@ const UserManagement = () => {
               <thead>
                 <tr>
                   <th>#</th>
+                  <th>User ID</th>
                   <th>Firstname</th>
                   <th>Lastname</th>
                   <th>Email</th>
@@ -135,6 +160,7 @@ const UserManagement = () => {
                 {users.map((user, index) => (
                   <tr key={user.id} className="hover">
                     <td>{index + 1}</td>
+                    <td>{user._id}</td>
                     <td>{user.firstName}</td>
                     <td>{user.lastName}</td>
                     <td>{user.email}</td>
@@ -144,17 +170,18 @@ const UserManagement = () => {
                         <button
                           className="btn btn-warning btn-xs"
                           onClick={() => {
-                            setEditUser(user);
+                            console.log("Setting edit user:", user); // Debugging
+                            setEditUser(user); // Set the user to be edited
                             document.getElementById(
                               "user-drawer"
-                            ).checked = true;
+                            ).checked = true; // Open the drawer
                           }}
                         >
                           Edit
                         </button>
                         <button
                           className="btn btn-error btn-xs"
-                          onClick={() => handleDelete(user.id)}
+                          onClick={() => handleDelete(user._id)}
                         >
                           Delete
                         </button>
@@ -175,11 +202,11 @@ const UserManagement = () => {
           ></label>
           <div className="bg-base-100 h-full w-1/4">
             <UserForm
-              user={editUser}
+              user={editUser} // This should contain the selected user for editing
               onSave={editUser ? handleEdit : handleCreate}
               onCancel={() => {
-                // Close drawer on cancel
-                document.getElementById("user-drawer").checked = false;
+                console.log("Cancel clicked, closing drawer"); // Debugging
+                document.getElementById("user-drawer").checked = false; // Close drawer on cancel
               }}
             />
           </div>

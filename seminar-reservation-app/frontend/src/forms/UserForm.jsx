@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
+import { useState, useEffect } from "react";
 
 const UserForm = ({ user, onSave, onCancel }) => {
   const [formData, setFormData] = useState({

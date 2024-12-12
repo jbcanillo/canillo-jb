@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -21,9 +20,8 @@ const NavBar = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-
           {/* Only show Management if the user is authenticated as admin */}
-          {isAuthenticated && user.role==='admin' && (
+          {isAuthenticated && user?.role === "admin" && (
             <li>
               <details>
                 <summary>Management</summary>
@@ -41,17 +39,20 @@ const NavBar = () => {
               </details>
             </li>
           )}
+          {isAuthenticated && user?.role === "user" && (
+            <>
+              <li>
+                <Link to="/my_bookings">My Bookings</Link>
+              </li>
+              <li>
+                <Link to="/seminars">Browse Seminars</Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
 
       <div className="flex-none gap-2">
-        <div className="form-control">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
-          />
-        </div>
         {/* Show the user avatar and profile link if authenticated */}
         {isAuthenticated ? (
           <div className="dropdown dropdown-end">
@@ -74,9 +75,11 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-               <li>
-                <h4 className="justify-center">Hello, {user?.name || "Human"}</h4>
-                <hr/>
+              <li>
+                <h4 className="justify-center">
+                  Hello, {user?.name || "Human"}
+                </h4>
+                <hr />
               </li>
               <li>
                 <a className="justify-between">
