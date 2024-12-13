@@ -1,64 +1,65 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
 // Create a context for authentication
 const AuthContext = createContext();
-
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
- 
+
   // On component mount, check if the user is authenticated based on backend token validation
   useEffect(() => {
-    // Make an authenticated request to check user session based on cookies
     const checkAuthStatus = async () => {
       try {
-        // Send request to backend to verify token via middleware
+        // Make an authenticated request to check the user's session
         const response = await axios.get(
           "http://localhost:5000/api/auth/status",
-          { withCredentials: true }
+          {
+            withCredentials: true,
+          }
         );
-        // If token is valid, set authenticated state and user data
-        setIsAuthenticated(true);
-        setUser(response.data.user); // Assuming the response contains the user
+        if (response.data.user) {
+          setIsAuthenticated(true);
+          setUser(response.data.user); // Set user data if response is valid
+        }
       } catch (error) {
-        // If the request fails (i.e., token is invalid or expired), set unauthenticated state
+        console.log("Cannot get authentication status",error);
         setIsAuthenticated(false);
         setUser(null);
       }
     };
+
     checkAuthStatus(); // Trigger the check on mount
   }, []);
 
   // Login function to set user and authentication state
   const login = (userData) => {
-    setUser(userData);
+    setUser(userData.user);
     setIsAuthenticated(true);
-    //Cookies.set('user', JSON.stringify(userData), { expires: 7 });
   };
 
-  // Logout function to reset state and clear cookies
-  const logout = () => {
+  // Logout function to reset state
+  const logout = async () => {
     try {
       // Call the backend to clear the httpOnly authToken cookie
-      axios.post(
+      await axios.post(
         "http://localhost:5000/api/auth/logout",
         {},
         { withCredentials: true }
       );
 
-      // Reset the state in frontend
+      // Reset state in frontend
       setUser(null);
       setIsAuthenticated(false);
 
       // Remove the user and authToken from client-side cookies (non-httpOnly)
       Cookies.remove("user");
       Cookies.remove("authToken");
-    } catch (err) {
-      console.error("Error logging out", err);
+    } catch (error) {
+      console.error("Error logging out", error);
     }
   };
 

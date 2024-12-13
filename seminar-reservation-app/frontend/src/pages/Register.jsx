@@ -62,7 +62,7 @@ const Register = () => {
     <div className="flex pt-10 items-center justify-center">
       <div className="card shadow-xl w-full bg-base-200 sm:w-96 card-bordered card-compact">
         <div className="card-title items-center justify-center">
-          <h1 className="text-5xl font-bold m-5">Sign Up</h1>
+          <h1 className="text-3xl font-bold m-5">Sign Up</h1>
         </div>
         <div className="card-body">
           <form onSubmit={formik.handleSubmit} className="space-y-4">

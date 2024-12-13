@@ -15,6 +15,7 @@ import Register from "./pages/Register";
 import UserManagement from "./pages/UserManagement";
 import SeminarManagement from "./pages/SeminarManagement";
 import BookingManagement from "./pages/BookingManagement";
+import Bookings from "./pages/Bookings";
 
 function App() {
   useEffect(() => {
@@ -32,6 +33,22 @@ function App() {
                 element={
                   <Layout>
                     <Home />
+                  </Layout>
+                }
+              />
+                <Route
+                path="/login"
+                element={
+                  <Layout>
+                    <Login />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <Layout>
+                    <Register />
                   </Layout>
                 }
               />
@@ -59,19 +76,11 @@ function App() {
                   </Layout>
                 }
               />
-              <Route
-                path="/login"
+               <Route
+                path="/my_bookings"
                 element={
                   <Layout>
-                    <Login />
-                  </Layout>
-                }
-              />
-              <Route
-                path="/register"
-                element={
-                  <Layout>
-                    <Register />
+                    <Bookings />
                   </Layout>
                 }
               />

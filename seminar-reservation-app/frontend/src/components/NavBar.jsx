@@ -1,13 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useEffect } from "react";
 
 const NavBar = () => {
-  const { isAuthenticated, logout, user } = useAuth(); // Access authentication state
+  const { isAuthenticated, logout, user } = useAuth(); // Get the authentication state
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/"); // Redirect to home after logout
   };
 
   return (
@@ -20,7 +21,8 @@ const NavBar = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          {/* Only show Management if the user is authenticated as admin */}
+          
+          {/* Only show Management if authenticated as admin */}
           {isAuthenticated && user?.role === "admin" && (
             <li>
               <details>
@@ -39,6 +41,8 @@ const NavBar = () => {
               </details>
             </li>
           )}
+
+          {/* Show this for authenticated users with "user" role */}
           {isAuthenticated && user?.role === "user" && (
             <>
               <li>
@@ -53,32 +57,20 @@ const NavBar = () => {
       </div>
 
       <div className="flex-none gap-2">
-        {/* Show the user avatar and profile link if authenticated */}
+        {/* Show avatar and profile if authenticated */}
         {isAuthenticated ? (
           <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
                   alt="User"
-                  src={
-                    user?.profilePic ||
-                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  }
+                  src={user?.profilePic || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
                 />
               </div>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
               <li>
-                <h4 className="justify-center">
-                  Hello, {user?.name || "Human"}
-                </h4>
+                <h4 className="justify-center">Hello, {user?.name || "Human"}</h4>
                 <hr />
               </li>
               <li>

@@ -36,10 +36,14 @@ const Login = () => {
         if (response.status === 200) {
           const userData = response.data;
           login(userData); // Assuming login function stores user info in context
-          navigate("/"); // Redirect to homepage or dashboard
+          if(userData.user.role==='admin'){
+            navigate("/manage_bookings");
+          }else{
+            navigate("/my_bookings");
+          }
         }
-      } catch (err) {
-        console.error("Login error", err);
+      } catch (error) {
+        console.error("Login error", error);
         formik.setErrors({
           general: "Invalid email and/or password. Please try again.",
         });
