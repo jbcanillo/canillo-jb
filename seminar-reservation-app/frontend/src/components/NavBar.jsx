@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { useEffect } from "react";
 
 const NavBar = () => {
   const { isAuthenticated, logout, user } = useAuth(); // Get the authentication state
@@ -12,7 +11,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 shadow-lg" id="app-nav-bar">
+    <div className="navbar bg-base-100 shadow-lg fixed" id="app-nav-bar">
       <div className="flex-1">
         <a className="btn text-xl">Zemina</a>
       </div>
@@ -21,7 +20,6 @@ const NavBar = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          
           {/* Only show Management if authenticated as admin */}
           {isAuthenticated && user?.role === "admin" && (
             <li>

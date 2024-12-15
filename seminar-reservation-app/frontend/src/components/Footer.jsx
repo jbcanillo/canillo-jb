@@ -35,13 +35,14 @@ const Footer = () => {
         <p>
           CaveMan Tech Ltd.
           <br />
-          <i>Providing learning platforms since Ice Age</i>
+          <i>"Providing learning platforms since Ice Age"</i>
           <br/>
           © {new Date().getFullYear()} All Rights Reserved
         </p>
       </aside>
       <nav>
         <h6 className="footer-title">Services</h6>
+        <a className="link link-hover">App Development</a>
         <a className="link link-hover">Event Management</a>
         <a className="link link-hover">Design & Marketing</a>
       </nav>
@@ -49,11 +50,13 @@ const Footer = () => {
         <h6 className="footer-title">Company</h6>
         <a className="link link-hover">About us</a>
         <a className="link link-hover">Contact us</a>
+        <a className="link link-hover">Jobs</a>
       </nav>
       <nav>
         <h6 className="footer-title">Legal</h6>
         <a className="link link-hover">Terms of use</a>
         <a className="link link-hover">Privacy policy</a>
+        <a className="link link-hover">Refund policy</a>
       </nav>
     </footer>
   );

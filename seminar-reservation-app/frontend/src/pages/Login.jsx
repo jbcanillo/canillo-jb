@@ -3,6 +3,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { login } = useAuth();
@@ -36,9 +37,9 @@ const Login = () => {
         if (response.status === 200) {
           const userData = response.data;
           login(userData); // Assuming login function stores user info in context
-          if(userData.user.role==='admin'){
+          if (userData.user.role === "admin") {
             navigate("/manage_bookings");
-          }else{
+          } else {
             navigate("/my_bookings");
           }
         }
@@ -88,6 +89,9 @@ const Login = () => {
               {formik.touched.password && formik.errors.password ? (
                 <div className="text-red-500">{formik.errors.password}</div>
               ) : null}
+            </div>
+            <div>
+              <Link to="/forgot_password">Forgot Password?</Link>
             </div>
             {/* Display general error message */}
             {formik.errors.general && (

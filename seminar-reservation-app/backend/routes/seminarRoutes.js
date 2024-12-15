@@ -12,7 +12,8 @@ import adminMiddleware from "../middleware/adminMiddleware.js";
 const router = express.Router();
 
 router.get("/", authMiddleware, adminMiddleware, getSeminars);
-router.get("/:id", authMiddleware, adminMiddleware, getSeminarDetails);
+router.get("/featured", getSeminars);
+router.get("/:id", getSeminarDetails);
 router.post("/", authMiddleware, adminMiddleware, createSeminar);
 router.put("/:id", authMiddleware, adminMiddleware, updateSeminar);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteSeminar);

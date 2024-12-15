@@ -81,7 +81,7 @@ const UserManagement = () => {
   };
 
   // Edit user
-  const handleEdit = (userData) => {
+  const handleUpdate = (userData) => {
     if (!editUser || !editUser._id) {
       console.error("No user selected for editing");
       showToastMessage("Error: User not selected for editing!", "error");
@@ -110,7 +110,9 @@ const UserManagement = () => {
 
   // Delete user
   const handleDelete = (id) => {
-    const isConfirmed = window.confirm("Are you sure you want to delete this user?");
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
     if (!isConfirmed) return; // If user cancels, do nothing
 
     Axios.delete(`http://localhost:5000/api/users/${id}`, {
@@ -157,44 +159,50 @@ const UserManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user, index) => (
-                  <tr key={user.id} className="hover">
-                    <td>{index + 1}</td>
-                    <td>{user._id}</td>
-                    <td>{user.firstName}</td>
-                    <td>{user.lastName}</td>
-                    <td>{user.email}</td>
-                    <td>{user.role}</td>
-                    <td>
-                      <span className="row flex gap-2">
-                        <button
-                          className="btn btn-warning btn-xs"
-                          onClick={() => {
-                            console.log("Setting edit user:", user); // Debugging
-                            setEditUser(user); // Set the user to be edited
-                            document.getElementById(
-                              "user-drawer"
-                            ).checked = true; // Open the drawer
-                          }}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="btn btn-error btn-xs"
-                          onClick={() => handleDelete(user._id)}
-                        >
-                          Delete
-                        </button>
-                      </span>
-                    </td>
+                {users.length === 0 ? (
+                  <tr>
+                    <td colSpan="9">No users available</td>
                   </tr>
-                ))}
+                ) : (
+                  users.map((user, index) => (
+                    <tr key={user.id} className="hover">
+                      <td>{index + 1}</td>
+                      <td>{user._id}</td>
+                      <td>{user.firstName}</td>
+                      <td>{user.lastName}</td>
+                      <td>{user.email}</td>
+                      <td>{user.role}</td>
+                      <td>
+                        <span className="row flex gap-2">
+                          <button
+                            className="btn btn-warning btn-xs"
+                            onClick={() => {
+                              console.log("Setting edit user:", user); // Debugging
+                              setEditUser(user); // Set the user to be edited
+                              document.getElementById(
+                                "user-drawer"
+                              ).checked = true; // Open the drawer
+                            }}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="btn btn-error btn-xs"
+                            onClick={() => handleDelete(user._id)}
+                          >
+                            Delete
+                          </button>
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         </div>
         {/* Drawer side content */}
-        <div className="drawer-side">
+        <div className="drawer-side fixed inset-0 z-50">
           <label
             htmlFor="user-drawer"
             aria-label="close sidebar"
@@ -203,7 +211,7 @@ const UserManagement = () => {
           <div className="bg-base-100 h-full w-1/4">
             <UserForm
               user={editUser} // This should contain the selected user for editing
-              onSave={editUser ? handleEdit : handleCreate}
+              onSave={editUser ? handleUpdate : handleCreate}
               onCancel={() => {
                 console.log("Cancel clicked, closing drawer"); // Debugging
                 document.getElementById("user-drawer").checked = false; // Close drawer on cancel
