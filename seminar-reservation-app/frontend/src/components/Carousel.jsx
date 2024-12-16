@@ -1,23 +1,6 @@
 import { useEffect, useRef } from "react";
-import { formatDate, formatTime } from "../hooks/hooks";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-
-// Function to generate a random color
-const randomColor = () => {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
-
-// Function to generate a random gradient
-const getRandomGradient = () => {
-  const color1 = randomColor();
-  const color2 = randomColor();
-  return `linear-gradient(to right, ${color1}, ${color2})`;
-};
+import { formatDate, formatTime, getRandomGradient } from "../hooks/hooks";
+import { Link } from "react-router-dom";
 
 const Carousel = ({ seminars }) => {
   const carouselRef = useRef(null);
@@ -81,7 +64,7 @@ const Carousel = ({ seminars }) => {
             key={seminar._id}
             className="carousel-item flex-none w-full md:w-96"
           >
-            <div className="card card-compact bg-base-300 w-full shadow-xl">
+            <div className="card card-compact bg-base-300 w-full border border-gray-800 shadow-xl">
               {/* Figure with random gradient background */}
               <figure
                 className="relative w-full h-48"
@@ -108,19 +91,18 @@ const Carousel = ({ seminars }) => {
               <div className="card-body">
                 <h2 className="card-title">{seminar.title}</h2>
                 <h3>Presented by {seminar.speaker.name}</h3>
-                <h3>Date: {formatDate(seminar.date)}</h3>
                 <h3>
-                  Time: {formatTime(seminar.timeFrame.from)} -{" "}
-                  {formatTime(seminar.timeFrame.to)} at {seminar.venue}
+                  {formatDate(seminar.date)} at{" "}
+                  {formatTime(seminar.timeFrame.from)} -{" "}
+                  {formatTime(seminar.timeFrame.to)}
                 </h3>
-                <p>{seminar.description}</p>
-                <div className="card-actions justify-end">
+                <div className="card-actions justify-center">
                   {/* Link to the seminar details page */}
                   <Link
                     to={`/seminar/${seminar._id}`} // Link to the seminar detail page
                     className="btn btn-sm btn-dark"
                   >
-                    Check now!
+                    Book now!
                   </Link>
                 </div>
               </div>

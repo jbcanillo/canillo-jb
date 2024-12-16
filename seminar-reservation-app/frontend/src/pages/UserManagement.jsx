@@ -134,18 +134,15 @@ const UserManagement = () => {
       <h1>User Management</h1>
       <label
         htmlFor="user-drawer"
-        className="btn btn-primary btn-xs justify-end"
+        className="btn btn-primary btn-xs justify-end mb-5"
         onClick={() => setEditUser(null)}
       >
         Add
       </label>
-      {/* Right-side drawer*/}
       <div className="drawer drawer-end">
-        {/* The drawer checkbox input to toggle visibility */}
         <input id="user-drawer" type="checkbox" className="drawer-toggle" />
-        {/* Page content */}
         <div className="drawer-content card card-bordered">
-          <div className="overflow-x-auto">
+          <div className="card p-2 shadow-xl border border-gray-800 overflow-auto">
             <table className="table table-zebra table-auto">
               <thead>
                 <tr>

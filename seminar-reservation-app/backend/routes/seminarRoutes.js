@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getSeminars,
+  getFeaturedSeminars,
   getSeminarDetails,
   createSeminar,
   updateSeminar,
@@ -11,8 +12,8 @@ import adminMiddleware from "../middleware/adminMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", authMiddleware, adminMiddleware, getSeminars);
-router.get("/featured", getSeminars);
+router.get("/", getSeminars);
+router.get("/featured", getFeaturedSeminars);
 router.get("/:id", getSeminarDetails);
 router.post("/", authMiddleware, adminMiddleware, createSeminar);
 router.put("/:id", authMiddleware, adminMiddleware, updateSeminar);

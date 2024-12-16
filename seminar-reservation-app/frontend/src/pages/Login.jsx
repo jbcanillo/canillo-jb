@@ -54,7 +54,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="card shadow-xl w-full bg-base-200 sm:w-96 card-bordered card-compact">
+      <div className="card shadow-xl w-full bg-base-300 sm:w-96 card-bordered card-compact border-gray-800">
         <div className="card-title items-center justify-center">
           <h1 className="text-5xl font-bold m-5">Zemina</h1>
         </div>
@@ -101,6 +101,12 @@ const Login = () => {
               Login
             </button>
           </form>
+          <div className="flex w-full flex-col border-opacity-50">
+            <div className="divider">Or no account yet?</div>
+              <Link className="btn btn-neutral w-full" to="/register">
+                Register
+              </Link>
+          </div>
         </div>
       </div>
     </div>

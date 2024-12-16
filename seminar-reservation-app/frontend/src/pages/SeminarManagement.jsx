@@ -95,7 +95,7 @@ const SeminarManagement = () => {
       <h1>Seminar Management</h1>
       <label
         htmlFor="seminar-drawer"
-        className="btn btn-primary btn-xs justify-end"
+        className="btn btn-primary btn-xs justify-end mb-5"
         onClick={() => setEditSeminar(null)}
       >
         Add
@@ -104,7 +104,7 @@ const SeminarManagement = () => {
       <div className="drawer drawer-end">
         <input id="seminar-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content card card-bordered">
-          <div className="overflow-auto">
+          <div className="card p-2 shadow-xl border border-gray-800 overflow-auto">
             <table className="table table-zebra table-auto">
               <thead>
                 <tr>

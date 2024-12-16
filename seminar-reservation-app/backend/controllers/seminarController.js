@@ -9,6 +9,16 @@ const getSeminars = async (req, res) => {
   }
 };
 
+const getFeaturedSeminars = async (req, res) => {
+  try {
+    // Fetch 10 random seminars, but it will return fewer if there are less than 10 available
+    const seminars = await Seminar.aggregate([{ $sample: { size: 10 } }]);
+    res.status(200).json(seminars);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching seminars", error });
+  }
+};
+
 const createSeminar = async (req, res) => {
   try {
     const seminar = await Seminar.create(req.body);
@@ -58,6 +68,7 @@ const getSeminarDetails = async (req, res) => {
 
 export {
   getSeminars,
+  getFeaturedSeminars,
   createSeminar,
   updateSeminar,
   deleteSeminar,

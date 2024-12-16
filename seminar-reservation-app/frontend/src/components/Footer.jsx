@@ -37,7 +37,7 @@ const Footer = () => {
           <br />
           <i>"Providing learning platforms since Ice Age"</i>
           <br/>
-          © {new Date().getFullYear()} All Rights Reserved
+          © {new Date().getFullYear()} All Rights Reserved.
         </p>
       </aside>
       <nav>

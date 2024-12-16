@@ -13,7 +13,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-100 shadow-lg fixed" id="app-nav-bar">
       <div className="flex-1">
-        <a className="btn text-xl">Zemina</a>
+        <a className="btn text-xl skeleton">Zemina</a>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">

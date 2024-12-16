@@ -17,6 +17,7 @@ import SeminarManagement from "./pages/SeminarManagement";
 import BookingManagement from "./pages/BookingManagement";
 import Bookings from "./pages/Bookings";
 import Seminars from "./pages/Seminars";
+import Seminar from "./pages/Seminar";
 
 function App() {
   useEffect(() => {
@@ -90,6 +91,14 @@ function App() {
                 element={
                   <Layout>
                     <Seminars />
+                  </Layout>
+                }
+              />
+               <Route
+                path="/seminar/:id"
+                element={
+                  <Layout>
+                    <Seminar />
                   </Layout>
                 }
               />

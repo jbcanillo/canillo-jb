@@ -26,4 +26,22 @@ const formatTime = (timeString) => {
   return `${hours12}:${formattedMinutes} ${ampm}`;
 };
 
-export { formatDate, formatTime };
+// Function to generate a random color
+const randomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+// Function to generate a random gradient
+const getRandomGradient = () => {
+  const color1 = randomColor();
+  const color2 = randomColor();
+  return `linear-gradient(to left, ${color1}, ${color2})`;
+};
+
+
+export { formatDate, formatTime, randomColor, getRandomGradient };
