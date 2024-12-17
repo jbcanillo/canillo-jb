@@ -23,6 +23,29 @@ const createBooking = async (req, res) => {
   }
 };
 
+const deleteBooking = async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    const seminar = await Seminar.findById(booking.seminar);
+    if (!seminar) {
+      return res.status(404).json({ message: "Seminar not found" });
+    }
+
+    seminar.slotsAvailable += 1;
+    await seminar.save();
+
+    await Booking.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Booking deleted successfully and seminar slots updated" });
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    res.status(500).json({ message: "Error deleting booking", error });
+  }
+};
+
 const getUserBookings = async (req, res) => {
   try {
     const bookings = await Booking.find({ user: req.user.id }).populate(
@@ -64,4 +87,4 @@ const updateBookingStatus = async (req, res) => {
   }
 };
 
-export { createBooking, getUserBookings, updateBookingStatus };
+export { createBooking, deleteBooking, getUserBookings, updateBookingStatus };

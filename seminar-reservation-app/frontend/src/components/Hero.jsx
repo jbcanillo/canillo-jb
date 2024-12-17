@@ -12,7 +12,7 @@ const Hero = () => {
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center">
         <div className="max-w-xl">
-          <h1 className="text-5xl font-bold">Zemina</h1>
+          <h1 className="text-5xl font-bold">Zzzemina</h1>
           <h1>Your Gateway for Learning</h1>
           <p className="py-6 text-lg">
             Experience effortless seminar reservation. Register, book your

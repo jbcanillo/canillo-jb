@@ -10,7 +10,7 @@ const Home = () => {
   const fetchSeminars = async () => {
     try {
       const response = await Axios.get(
-        "http://localhost:5000/api/seminars/featured",
+        "http://localhost:5000/api/seminars/featured/10",
         {
           withCredentials: true,
         }
@@ -39,7 +39,7 @@ const Home = () => {
         <span className="text-3xl mt-10 mb-4">
           Looking for more?
         </span>
-        <Link to="/browse" className="btn btn-wide btn-secondary">
+        <Link to="/browse_seminars" className="btn btn-wide btn-secondary">
           Browse...
         </Link>
       </div>

@@ -13,7 +13,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-100 shadow-lg fixed" id="app-nav-bar">
       <div className="flex-1">
-        <a className="btn text-xl skeleton">Zemina</a>
+        <a className="btn text-xl skeleton">Zzzemina</a>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
@@ -47,7 +47,7 @@ const NavBar = () => {
                 <Link to="/my_bookings">My Bookings</Link>
               </li>
               <li>
-                <Link to="/seminars">Browse Seminars</Link>
+                <Link to="/browse_seminars">Browse Seminars</Link>
               </li>
             </>
           )}

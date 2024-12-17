@@ -92,15 +92,16 @@ const SeminarManagement = () => {
 
   return (
     <section>
-      <h1>Seminar Management</h1>
-      <label
-        htmlFor="seminar-drawer"
-        className="btn btn-primary btn-xs justify-end mb-5"
-        onClick={() => setEditSeminar(null)}
-      >
-        Add
-      </label>
-
+      <div className="flex items-center justify-between">
+        <h1>Seminar Management</h1>
+        <label
+          htmlFor="seminar-drawer"
+          className="btn btn-primary btn-xs"
+          onClick={() => setEditSeminar(null)}
+        >
+          Add
+        </label>
+      </div>
       <div className="drawer drawer-end">
         <input id="seminar-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content card card-bordered">
@@ -109,6 +110,7 @@ const SeminarManagement = () => {
               <thead>
                 <tr>
                   <th>#</th>
+                  <th>ID</th>
                   <th>Title</th>
                   <th>Description</th>
                   <th>Date</th>
@@ -128,6 +130,7 @@ const SeminarManagement = () => {
                   seminars.map((seminar, index) => (
                     <tr key={seminar._id} className="hover">
                       <td>{index + 1}</td>
+                      <td>{seminar._id}</td>
                       <td>{seminar.title}</td>
                       <td>{seminar.description}</td>
                       <td>{formatDate(seminar.date)}</td>

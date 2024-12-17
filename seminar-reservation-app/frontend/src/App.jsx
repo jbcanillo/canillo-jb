@@ -21,7 +21,7 @@ import Seminar from "./pages/Seminar";
 
 function App() {
   useEffect(() => {
-    document.title = "Zemina";
+    document.title = "Zzzemina";
   }, []);
 
   return (
@@ -87,7 +87,7 @@ function App() {
                 }
               />
               <Route
-                path="/browse"
+                path="/browse_seminars"
                 element={
                   <Layout>
                     <Seminars />

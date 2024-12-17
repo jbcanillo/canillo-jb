@@ -6,8 +6,7 @@ import { useToast } from "../contexts/ToastContext";
 
 const Seminars = () => {
   const [date, setDate] = useState("");
-  const [timeFrom, setTimeFrom] = useState("");
-  const [timeTo, setTimeTo] = useState("");
+  const [timeFrom, setTimeFrom] = useState(""); // Time input will be in AM/PM format
   const [speaker, setSpeaker] = useState("");
   const [seminars, setSeminars] = useState([]); // Holds all seminars
   const [filteredSeminars, setFilteredSeminars] = useState([]); // Holds filtered seminars
@@ -15,7 +14,7 @@ const Seminars = () => {
 
   // Fetch all seminars initially
   useEffect(() => {
-    Axios.get("http://localhost:5000/api/seminars")
+    Axios.get("http://localhost:5000/api/seminars/available")
       .then((response) => {
         setSeminars(response.data);
         setFilteredSeminars(response.data); // Show all initially
@@ -26,35 +25,29 @@ const Seminars = () => {
       });
   }, []);
 
-  
-  console.log(seminars)
-
   // Handle search functionality
   const handleSearch = () => {
     let filtered = seminars;
-
     if (date) {
-      filtered = filtered.filter((seminar) => seminar.date === date);
+      // Format both the seminar date and the input date for comparison
+      filtered = filtered.filter(
+        (seminar) => formatDate(seminar.date) === formatDate(date)
+      );
     }
-
+    // Filter only by timeFrom (AM/PM)
     if (timeFrom) {
-      filtered = filtered.filter(
-        (seminar) => formatTime(seminar.timeFrame.from) >= timeFrom
-      );
+      filtered = filtered.filter((seminar) => {
+        // Get AM/PM part of the time
+        const seminarTime = formatTime(seminar.timeFrame.from, "h:mm a"); // "h:mm a" format, AM/PM
+        const timePart = seminarTime.split(" ")[1]; // Extract AM/PM part
+        return timePart === timeFrom;
+      });
     }
-
-    if (timeTo) {
-      filtered = filtered.filter(
-        (seminar) => formatTime(seminar.timeFrame.to) <= timeTo
-      );
-    }
-
     if (speaker) {
       filtered = filtered.filter((seminar) =>
         seminar.speaker.name.toLowerCase().includes(speaker.toLowerCase())
       );
     }
-
     setFilteredSeminars(filtered);
     if (filtered.length === 0) {
       showToastMessage(
@@ -62,6 +55,14 @@ const Seminars = () => {
         "info"
       );
     }
+  };
+
+  // Handle clear functionality
+  const handleClear = () => {
+    setDate("");
+    setTimeFrom("");
+    setSpeaker("");
+    setFilteredSeminars(seminars);
   };
 
   return (
@@ -72,7 +73,7 @@ const Seminars = () => {
             <div className="flex items-center gap-2">
               <label className="w-10">Date:</label>
               <input
-                className="input input-bordered w-40"
+                className="input input-bordered w-48"
                 type="date"
                 name="date"
                 value={date}
@@ -80,24 +81,17 @@ const Seminars = () => {
               />
             </div>
             <div className="flex items-center gap-2">
-              <label className="w-20">Time From:</label>
-              <input
-                className="input input-bordered w-40"
-                type="time"
+              <label className="w-20">Time of day:</label>
+              <select
+                className="input input-bordered w-48"
                 name="timeFrom"
                 value={timeFrom}
                 onChange={(e) => setTimeFrom(e.target.value)}
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <label className="w-20">Time To:</label>
-              <input
-                className="input input-bordered w-40"
-                type="time"
-                name="timeTo"
-                value={timeTo}
-                onChange={(e) => setTimeTo(e.target.value)}
-              />
+              >
+                <option value="">Select</option>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
             </div>
             <div className="flex items-center gap-2">
               <label className="w-20">Speaker:</label>
@@ -113,12 +107,13 @@ const Seminars = () => {
               <button className="btn btn-primary w-44" onClick={handleSearch}>
                 Search
               </button>
+              <button className="btn btn-neutral w-44" onClick={handleClear}>
+                Clear
+              </button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Cards Section - Centered */}
       <div className="flex flex-wrap justify-center items-center gap-4">
         {filteredSeminars.map((seminar) => (
           <div
@@ -154,6 +149,7 @@ const Seminars = () => {
                   {formatTime(seminar.timeFrame.from)} -{" "}
                   {formatTime(seminar.timeFrame.to)}
                 </h3>
+                <h3>{seminar.slotsAvailable} available slots remaining!</h3>
                 <div className="card-actions justify-center">
                   <Link
                     to={`/seminar/${seminar._id}`}

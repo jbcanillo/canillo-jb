@@ -62,9 +62,9 @@ const Carousel = ({ seminars }) => {
         {randomSeminars.map((seminar) => (
           <div
             key={seminar._id}
-            className="carousel-item flex-none w-full md:w-96"
+            className=" carousel-item flex-none w-full md:w-96"
           >
-            <div className="card card-compact bg-base-300 w-full border border-gray-800 shadow-xl">
+            <div className="skeleton card card-compact bg-base-300 w-full border border-gray-800 shadow-xl">
               {/* Figure with random gradient background */}
               <figure
                 className="relative w-full h-48"
@@ -96,6 +96,7 @@ const Carousel = ({ seminars }) => {
                   {formatTime(seminar.timeFrame.from)} -{" "}
                   {formatTime(seminar.timeFrame.to)}
                 </h3>
+                <h3>{seminar.slotsAvailable} available slots remaining!</h3>
                 <div className="card-actions justify-center">
                   {/* Link to the seminar details page */}
                   <Link

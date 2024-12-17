@@ -1,16 +1,29 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { formatDate, formatTime, getRandomGradient } from "../hooks/hooks";
 import Axios from "axios";
-import { FaUser, FaCalendar, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaUser,
+  FaCalendar,
+  FaClock,
+  FaMapMarkerAlt,
+  FaChair,
+} from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
+import { useToast } from "../contexts/ToastContext";
+import CountdownTimer from "../components/CountdownTimer";
 
 const Seminar = () => {
+  const navigate = useNavigate();
+  const { showToastMessage } = useToast();
   const { isAuthenticated, user } = useAuth();
   const { id } = useParams();
   const [seminar, setSeminar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [background, setBackground] = useState(getRandomGradient());
+
+  // Fetch seminar data from API
   const fetchSeminar = async () => {
     try {
       setLoading(true);
@@ -29,10 +42,10 @@ const Seminar = () => {
     }
   };
 
-  // Fetch seminar data when the component mounts
+  // Fetch seminar data when the component mounts or when `id` changes
   useEffect(() => {
-    fetchSeminar(); // Call async function
-  }, [id]); // Re-run when the `id` changes
+    fetchSeminar();
+  }, [id]);
 
   // Show loading message until data is fetched
   if (loading) {
@@ -49,10 +62,35 @@ const Seminar = () => {
     return <div>No seminar found.</div>;
   }
 
+  // Extract the necessary data
+  const seminarDate = seminar.date.trim().split("T")[0]; // e.g., "2024-12-14"
+  const seminarTime = seminar.timeFrame.from.trim(); // Ensure proper time format
+
+  const handleAddBooking = (seminarId) => {
+    Axios.post(
+      `http://localhost:5000/api/bookings`,
+      { seminarId, user },
+      {
+        withCredentials: true,
+      }
+    )
+      .then(() => {
+        showToastMessage(
+          "You have successfully booked this seminar!",
+          "success"
+        );
+        navigate("/my_bookings");
+      })
+      .catch((error) => {
+        console.error("Error booking this seminar:", error);
+        showToastMessage(error.response?.data?.error || "Error", "warning");
+      });
+  };
+
   return (
     <section className="m-10 p-10">
       <div className="skeleton mockup-browser bg-base-300 shadow-xl">
-        <div className=" mockup-browser-toolbar">
+        <div className="mockup-browser-toolbar">
           <div className="input justify-center text-center">
             <Link to={seminar.speaker?.linkedin || "#"}>
               {seminar.speaker?.linkedin || "LinkedIn"}
@@ -62,7 +100,7 @@ const Seminar = () => {
         <div
           className="bg-base-200 px-4 py-5"
           style={{
-            background: getRandomGradient(),
+            background: background, // Using the fixed background gradient
             borderRadius: "0.375rem",
           }}
         >
@@ -76,10 +114,9 @@ const Seminar = () => {
                   }
                   alt={seminar.speaker.name}
                   className="w-48 h-48 rounded-full border-4 border-white"
-                  onError={
-                    (e) =>
-                      (e.target.src =
-                        "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp") // Fallback image
+                  onError={(e) =>
+                    (e.target.src =
+                      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp")
                   }
                 />
               </div>
@@ -87,7 +124,7 @@ const Seminar = () => {
                 <h1
                   className="text-4xl mb-2"
                   style={{
-                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)", // Add a text shadow for better contrast
+                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
                   }}
                 >
                   {seminar.title || "Seminar Title"}
@@ -95,13 +132,17 @@ const Seminar = () => {
                 <p
                   className="italic"
                   style={{
-                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)", // Add a text shadow for better contrast
+                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
                   }}
                 >
                   {seminar.description}
                 </p>
               </div>
               <div className="flex flex-col gap-4 bg-base-300 p-4 rounded-lg">
+                <CountdownTimer
+                  seminarDate={seminarDate}
+                  seminarTime={seminarTime}
+                />
                 <div className="flex items-center gap-2">
                   <FaUser />
                   <h3>Speaker: {seminar.speaker?.name}</h3>
@@ -121,16 +162,43 @@ const Seminar = () => {
                   <FaMapMarkerAlt />
                   <h3>Venue: {seminar.venue}</h3>
                 </div>
+                <div className="flex items-center gap-2">
+                  <FaChair />
+                  <h3>Slots remaining: {seminar.slotsAvailable}</h3>
+                </div>
                 <div className="items-center justify-center w-full">
                   {isAuthenticated && user?.role === "user" ? (
-                    <Link
-                      to={`/booking/${seminar._id}`}
-                      className="btn btn-xl btn-neutral btn-wide"
-                    >
-                      Book a reservation
-                    </Link>
+                    (() => {
+                      const today = new Date();
+                      const seminarDate = new Date(seminar.date);
+
+                      if (seminar.slotsAvailable <= 0) {
+                        return (
+                          <p className="m-2 text-xl justify-center text-center text-red-500">
+                            Fully booked!
+                          </p>
+                        );
+                      } else if (seminarDate > today) {
+                        return (
+                          <button
+                            className="btn btn-xl btn-neutral btn-block"
+                            onClick={() => handleAddBooking(seminar._id)}
+                          >
+                            Book a reservation
+                          </button>
+                        );
+                      } else {
+                        return (
+                          <p className="m-2 text-xl justify-center text-center text-red-500">
+                            No longer available!
+                          </p>
+                        );
+                      }
+                    })()
                   ) : (
-                    <p className="justify-center text-center text-gray-500">Please, login first!</p>
+                    <p className="m-2 text-xl justify-center text-center text-red-500">
+                      Please, login first!
+                    </p>
                   )}
                 </div>
               </div>

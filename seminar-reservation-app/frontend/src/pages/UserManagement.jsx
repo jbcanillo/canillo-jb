@@ -131,14 +131,16 @@ const UserManagement = () => {
 
   return (
     <section>
-      <h1>User Management</h1>
-      <label
-        htmlFor="user-drawer"
-        className="btn btn-primary btn-xs justify-end mb-5"
-        onClick={() => setEditUser(null)}
-      >
-        Add
-      </label>
+      <div className="flex items-center justify-between">
+        <h1 className="">User Management</h1>
+        <label
+          htmlFor="user-drawer"
+          className="btn btn-primary btn-xs"
+          onClick={() => setEditUser(null)}
+        >
+          Add
+        </label>
+      </div>
       <div className="drawer drawer-end">
         <input id="user-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content card card-bordered">

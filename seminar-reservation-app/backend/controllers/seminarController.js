@@ -9,15 +9,31 @@ const getSeminars = async (req, res) => {
   }
 };
 
-const getFeaturedSeminars = async (req, res) => {
+const getAvailableSeminars = async (req, res) => {
   try {
-    // Fetch 10 random seminars, but it will return fewer if there are less than 10 available
-    const seminars = await Seminar.aggregate([{ $sample: { size: 10 } }]);
+    const limit = req.params.limit ? parseInt(req.params.limit) : 0; // Capture the limit from the URL
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set the time to the start of the day (00:00:00.000)
+
+    let seminars;
+
+    if (limit > 0) {
+      // Fetch random seminars that are scheduled for today or in the future
+      seminars = await Seminar.aggregate([
+        { $match: { date: { $gte: today } } }, // Match seminars where date is >= today
+        { $sample: { size: limit } }, // Fetch random seminars
+      ]);
+    } else {
+      // Fetch all available seminars that are scheduled for today or in the future
+      seminars = await Seminar.find({ date: { $gte: today } }); // Only seminars from today and in the future
+    }
+
     res.status(200).json(seminars);
   } catch (error) {
     res.status(500).json({ message: "Error fetching seminars", error });
   }
 };
+
 
 const createSeminar = async (req, res) => {
   try {
@@ -68,7 +84,7 @@ const getSeminarDetails = async (req, res) => {
 
 export {
   getSeminars,
-  getFeaturedSeminars,
+  getAvailableSeminars,
   createSeminar,
   updateSeminar,
   deleteSeminar,

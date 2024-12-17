@@ -23,3 +23,7 @@ h1{
   position: 'absolute';
   z-index: 999
 }
+
+.drawer-side {
+  z-index: 1000;
+}

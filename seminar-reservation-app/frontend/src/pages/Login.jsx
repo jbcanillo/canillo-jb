@@ -56,7 +56,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center">
       <div className="card shadow-xl w-full bg-base-300 sm:w-96 card-bordered card-compact border-gray-800">
         <div className="card-title items-center justify-center">
-          <h1 className="text-5xl font-bold m-5">Zemina</h1>
+          <h1 className="text-5xl font-bold m-5">Zzzemina</h1>
         </div>
         <div className="card-body">
           <form onSubmit={formik.handleSubmit} className="space-y-4">

@@ -33,11 +33,12 @@ const Footer = () => {
           </g>
         </svg>
         <p>
-          CaveMan Tech Ltd.
+          <b>CaveMan Tech Ltd.</b>
           <br />
-          <i>"Providing learning platforms since Ice Age"</i>
-          <br/>
-          © {new Date().getFullYear()} All Rights Reserved.
+          <span className="text-xs">
+            <i>Providing innovative platforms since Ice Age</i>
+            <br />© {new Date().getFullYear()} All Rights Reserved.
+          </span>
         </p>
       </aside>
       <nav>
