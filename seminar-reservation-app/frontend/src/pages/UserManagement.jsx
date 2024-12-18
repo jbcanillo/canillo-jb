@@ -160,7 +160,7 @@ const UserManagement = () => {
               <tbody>
                 {users.length === 0 ? (
                   <tr>
-                    <td colSpan="9">No users available</td>
+                    <td colSpan="99" className="text-center">No users available</td>
                   </tr>
                 ) : (
                   users.map((user, index) => (
@@ -176,11 +176,11 @@ const UserManagement = () => {
                           <button
                             className="btn btn-warning btn-xs"
                             onClick={() => {
-                              console.log("Setting edit user:", user); // Debugging
-                              setEditUser(user); // Set the user to be edited
+                              console.log("Setting edit user:", user);
+                              setEditUser(user);
                               document.getElementById(
                                 "user-drawer"
-                              ).checked = true; // Open the drawer
+                              ).checked = true;
                             }}
                           >
                             Edit
@@ -209,11 +209,11 @@ const UserManagement = () => {
           ></label>
           <div className="bg-base-100 h-full w-1/4">
             <UserForm
-              user={editUser} // This should contain the selected user for editing
+              user={editUser}
               onSave={editUser ? handleUpdate : handleCreate}
               onCancel={() => {
-                console.log("Cancel clicked, closing drawer"); // Debugging
-                document.getElementById("user-drawer").checked = false; // Close drawer on cancel
+                console.log("Cancel clicked, closing drawer");
+                document.getElementById("user-drawer").checked = false;
               }}
             />
           </div>

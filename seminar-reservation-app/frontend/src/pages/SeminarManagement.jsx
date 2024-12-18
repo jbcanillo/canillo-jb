@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
-import { formatDate, formatTime } from "../hooks/hooks";
+import { formatDate, formatTime } from "../hooks/customHooks";
 import { useToast } from "../contexts/ToastContext";
 import SeminarForm from "../forms/SeminarForm";
 
@@ -41,7 +41,7 @@ const SeminarManagement = () => {
       })
       .catch((error) => {
         console.error("Error creating seminar:", error);
-        showToastMessage(error.response?.data?.error || "Error", "error");
+        showToastMessage(error.response?.data?.message|| "Error", "error");
       });
   };
 
@@ -64,7 +64,7 @@ const SeminarManagement = () => {
       })
       .catch((error) => {
         console.error("Error updating seminar:", error);
-        showToastMessage(error.response?.data?.error || "Error", "error");
+        showToastMessage(error.response?.data?.message|| "Error", "error");
       });
   };
 
@@ -86,7 +86,7 @@ const SeminarManagement = () => {
       })
       .catch((error) => {
         console.error("Error deleting seminar:", error);
-        showToastMessage(error.response?.data?.error || "Error", "warning");
+        showToastMessage(error.response?.data?.message|| "Error", "error");
       });
   };
 
@@ -111,41 +111,33 @@ const SeminarManagement = () => {
                 <tr>
                   <th>#</th>
                   <th>ID</th>
+                  <th>Speaker</th>
                   <th>Title</th>
                   <th>Description</th>
                   <th>Date</th>
-                  <th>Time From</th>
-                  <th>Time To</th>
+                  <th>Time</th>
                   <th>Venue</th>
-                  <th>Speaker</th>
+                  <th>Slots Remaining</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {seminars.length === 0 ? (
                   <tr>
-                    <td colSpan="9">No seminars available</td>
+                    <td colSpan="99" className="text-center">No seminars available</td>
                   </tr>
                 ) : (
                   seminars.map((seminar, index) => (
                     <tr key={seminar._id} className="hover">
                       <td>{index + 1}</td>
                       <td>{seminar._id}</td>
+                      <td>{seminar.speaker ? seminar.speaker.name : "No speaker assigned"}</td>
                       <td>{seminar.title}</td>
                       <td>{seminar.description}</td>
                       <td>{formatDate(seminar.date)}</td>
-                      <td>
-                        {seminar.timeFrame?.from
-                          ? formatTime(seminar.timeFrame.from)
-                          : "N/A"}
-                      </td>
-                      <td>
-                        {seminar.timeFrame?.to
-                          ? formatTime(seminar.timeFrame.to)
-                          : "N/A"}
-                      </td>
+                      <td>{seminar.timeFrame ? formatTime(seminar.timeFrame.from) + " - " + formatTime(seminar.timeFrame.to) : "No time frame available"}</td>
                       <td>{seminar.venue}</td>
-                      <td>{seminar.speaker?.name || "N/A"}</td>
+                      <td>{seminar.slotsAvailable}</td>
                       <td>
                         <span className="row flex gap-2">
                           <button

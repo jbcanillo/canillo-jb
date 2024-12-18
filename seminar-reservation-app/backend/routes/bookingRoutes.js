@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getBookings,
   createBooking,
   deleteBooking,
   getUserBookings,
@@ -10,9 +11,10 @@ import adminMiddleware from "../middleware/adminMiddleware.js";
 
 const router = express.Router();
 
+router.get("/", authMiddleware, adminMiddleware, getBookings);
+router.get("/user_bookings", authMiddleware, getUserBookings);
 router.post("/", authMiddleware, createBooking);
 router.delete("/:id", authMiddleware, deleteBooking);
-router.get("/", authMiddleware, getUserBookings);
 router.put("/:id", authMiddleware, adminMiddleware, updateBookingStatus);
 
 export default router;

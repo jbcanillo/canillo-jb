@@ -34,7 +34,6 @@ const Register = () => {
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true);
       setGeneralError(""); // Reset the general error before submission
-
       try {
         const response = await axios.post(
           "http://localhost:5000/api/auth/register",
@@ -47,11 +46,10 @@ const Register = () => {
           );
           navigate("/login");
         }
-      } catch (err) {
+      } catch (error) {
         // Set the general error to display
         setGeneralError("Registration failed. Please try again.");
-        showToastMessage("Registration failed. Please try again.", "error");
-        console.error("Registration error", err);
+        showToastMessage(error.response?.data?.message|| "Error", "error");
       } finally {
         setSubmitting(false);
       }

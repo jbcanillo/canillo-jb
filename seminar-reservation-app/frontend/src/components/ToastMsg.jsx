@@ -17,12 +17,12 @@ const ToastMsg = ({ message, type, onClose }) => {
   if (!isVisible) return null;
 
   // Ensure the type is a valid class name for DaisyUI
-  const validTypes = ["success", "error", "warning", "info"];
+  const validTypes = ["success", "warning", "error", "info"];
   const toastType = validTypes.includes(type) ? type : "info"; // Default to "info" if type is invalid
 
   return (
     <motion.div
-      className={`toast toast-top`}
+      className="toast toast-center toast-top"
       initial={{ opacity: 0, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 0 }}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
-import { formatDate, formatTime, getRandomGradient } from "../hooks/hooks";
+import { formatDate, formatTime, getRandomGradient } from "../hooks/customHooks";
 import { useToast } from "../contexts/ToastContext";
 
 const Seminars = () => {
@@ -21,7 +21,7 @@ const Seminars = () => {
       })
       .catch((error) => {
         console.error("Error fetching seminars:", error);
-        showToastMessage(error.response?.data?.error || "Error", "error");
+        showToastMessage(error.response?.data?.message|| "Error", "error");
       });
   }, []);
 
@@ -149,7 +149,7 @@ const Seminars = () => {
                   {formatTime(seminar.timeFrame.from)} -{" "}
                   {formatTime(seminar.timeFrame.to)}
                 </h3>
-                <h3>{seminar.slotsAvailable} available slots remaining!</h3>
+                <h3>{seminar.slotsAvailable} available slots remaining</h3>
                 <div className="card-actions justify-center">
                   <Link
                     to={`/seminar/${seminar._id}`}

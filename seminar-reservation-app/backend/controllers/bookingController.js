@@ -1,5 +1,16 @@
 import Booking from "../models/Booking.js";
 import Seminar from "../models/Seminar.js";
+import User from "../models/User.js";
+
+const getBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find().populate("seminar").populate("user");
+    res.status(200).json(bookings);
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).json({ message: "Error fetching bookings", error });
+  }
+};
 
 const createBooking = async (req, res) => {
   try {
@@ -39,7 +50,11 @@ const deleteBooking = async (req, res) => {
     await seminar.save();
 
     await Booking.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Booking deleted successfully and seminar slots updated" });
+    res
+      .status(200)
+      .json({
+        message: "Booking deleted successfully and seminar slots updated",
+      });
   } catch (error) {
     console.error("Error deleting booking:", error);
     res.status(500).json({ message: "Error deleting booking", error });
@@ -62,12 +77,10 @@ const updateBookingStatus = async (req, res) => {
     const { id } = req.params;
     const { paymentStatus } = req.body;
 
-    // Validate paymentStatus
     if (!["pending", "confirmed", "rejected"].includes(paymentStatus)) {
       return res.status(400).json({ message: "Invalid payment status" });
     }
 
-    // Find and update booking
     const updatedBooking = await Booking.findByIdAndUpdate(
       id,
       { paymentStatus },
@@ -83,8 +96,16 @@ const updateBookingStatus = async (req, res) => {
       booking: updatedBooking,
     });
   } catch (error) {
-    res.status(500).json({ message: "Error updating booking status", error });
+    console.error("Error updating booking status:", error); // Log the error
+    res.status(500).json({ message: "Error updating booking status", error: error.message });
   }
 };
 
-export { createBooking, deleteBooking, getUserBookings, updateBookingStatus };
+
+export {
+  getBookings,
+  createBooking,
+  deleteBooking,
+  getUserBookings,
+  updateBookingStatus,
+};

@@ -26,6 +26,13 @@ const formatTime = (timeString) => {
   return `${hours12}:${formattedMinutes} ${ampm}`;
 };
 
+function formatCurrency(amount, currencyCode = "USD") {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currencyCode,
+  }).format(amount);
+}
+
 // Function to generate a random color
 const randomColor = () => {
   const letters = "0123456789ABCDEF";
@@ -43,5 +50,19 @@ const getRandomGradient = () => {
   return `linear-gradient(to left, ${color1}, ${color2})`;
 };
 
+// Capitalize first letter of each word and lowercase the rest
+function toProperCase(str) {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
 
-export { formatDate, formatTime, randomColor, getRandomGradient };
+export {
+  formatDate,
+  formatTime,
+  formatCurrency,
+  randomColor,
+  getRandomGradient,
+  toProperCase,
+};

@@ -1,4 +1,5 @@
 import Seminar from "../models/Seminar.js";
+import Booking from "../models/Booking.js";
 
 const getSeminars = async (req, res) => {
   try {
@@ -62,6 +63,14 @@ const updateSeminar = async (req, res) => {
 
 const deleteSeminar = async (req, res) => {
   try {
+    const bookings = await Booking.find({ seminar: req.params.id });
+
+    if (bookings.length > 0) {
+      return res.status(400).json({
+        message: "Cannot delete seminar because there are bookings associated with it",
+      });
+    }
+
     await Seminar.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Seminar deleted successfully" });
   } catch (error) {

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { formatDate, formatTime, getRandomGradient } from "../hooks/hooks";
+import { formatDate, formatTime, getRandomGradient } from "../hooks/customHooks";
 import { Link } from "react-router-dom";
 
 const Carousel = ({ seminars }) => {
@@ -96,11 +96,11 @@ const Carousel = ({ seminars }) => {
                   {formatTime(seminar.timeFrame.from)} -{" "}
                   {formatTime(seminar.timeFrame.to)}
                 </h3>
-                <h3>{seminar.slotsAvailable} available slots remaining!</h3>
+                <h3>{seminar.slotsAvailable} available slots remaining</h3>
                 <div className="card-actions justify-center">
                   {/* Link to the seminar details page */}
                   <Link
-                    to={`/seminar/${seminar._id}`} // Link to the seminar detail page
+                    to={`/seminar/${seminar._id}`}
                     className="btn btn-sm btn-dark"
                   >
                     Book now!

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { formatDate, formatTime, getRandomGradient } from "../hooks/hooks";
+import {
+  formatDate,
+  formatTime,
+  formatCurrency,
+  getRandomGradient,
+} from "../hooks/customHooks";
 import Axios from "axios";
 import {
   FaUser,
@@ -8,7 +13,9 @@ import {
   FaClock,
   FaMapMarkerAlt,
   FaChair,
+  FaArrowLeft,
 } from "react-icons/fa";
+import { MdPayment } from "react-icons/md";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import CountdownTimer from "../components/CountdownTimer";
@@ -83,12 +90,15 @@ const Seminar = () => {
       })
       .catch((error) => {
         console.error("Error booking this seminar:", error);
-        showToastMessage(error.response?.data?.error || "Error", "warning");
+        showToastMessage(error.response?.data?.message || "Error", "error");
       });
   };
 
   return (
     <section className="m-10 p-10">
+      <button onClick={()=> navigate(-1)} className="text-2xl -mt-3 mb-4">
+        <FaArrowLeft />
+      </button>
       <div className="skeleton mockup-browser bg-base-300 shadow-xl">
         <div className="mockup-browser-toolbar">
           <div className="input justify-center text-center">
@@ -163,6 +173,13 @@ const Seminar = () => {
                   <h3>Venue: {seminar.venue}</h3>
                 </div>
                 <div className="flex items-center gap-2">
+                  <MdPayment />
+                  <h3>
+                    Fee:{" "}
+                    {seminar.fee > 0 ? formatCurrency(seminar.fee) : "Free"}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2">
                   <FaChair />
                   <h3>Slots remaining: {seminar.slotsAvailable}</h3>
                 </div>
@@ -197,7 +214,7 @@ const Seminar = () => {
                     })()
                   ) : (
                     <p className="m-2 text-xl justify-center text-center text-red-500">
-                      Please, login first!
+                      Please login to reserve
                     </p>
                   )}
                 </div>
